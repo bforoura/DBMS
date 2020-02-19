@@ -1,0 +1,29 @@
+<?php
+
+//***
+abstract class HumanBeing {
+    protected abstract function display();
+}
+
+
+//***
+class Person extends HumanBeing {
+
+   //*** public vs. protected vs. private
+   public $name;
+   public $age;
+
+   //*** constructor
+   public function Person($n, $a) {
+      $this->name = $n;
+      $this->age  = $a;
+   }
+
+   //*** a public method
+   public function display() {
+      return $this->name . " is " . $this->age . " years old.";
+   }
+
+} //Person
+
+?>

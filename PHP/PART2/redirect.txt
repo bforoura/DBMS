@@ -1,0 +1,26 @@
+<?php
+#      There are two ways:
+
+
+
+
+# Method 1:
+#      ob_start();
+#        echo "Do bunch of stuff here but buffer output before redirecting";
+#        echo "Otherwise, you will get Warning: Cannot modify header information - headers already sent by";
+#        header("Location: http://www.sju.edu");
+#      ob_flush();
+
+
+
+
+
+
+# Method 2:
+      function Redirect($url) {
+	        echo "<script>location.href='".$url."'</script>";
+       }
+
+
+       Redirect("http://www.sju.edu/~bforoura");
+?>

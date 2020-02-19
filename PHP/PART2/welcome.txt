@@ -1,0 +1,18 @@
+<?php
+      //*** start a new session
+       session_start();
+
+       //*** do this when form is submitted
+       if (isset($_SESSION["ValidUser"])) {
+
+         $uname = $_SESSION["ValidUser"];
+?>
+         <h1 align=center>Welcome <?php echo $uname ?>!</h1>
+         <br><br>
+         <a href="logout.php">Logout</a>
+<?php
+       }
+       else
+           //*** redirect to login page when an illegal attempt is made
+           header("Location: login.php");
+?>

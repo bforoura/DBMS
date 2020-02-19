@@ -1,0 +1,10 @@
+<?php
+
+   $to        = "someone@sju.edu";
+   $from      = "John Smith <jsmith@somewhere.com>";
+   $subject   = "Regarding your apppointment";
+   $message   = "Your Friday appointment is canceled.\n\nThanks.";
+
+   mail($to, $subject, $message, $from);
+
+?>

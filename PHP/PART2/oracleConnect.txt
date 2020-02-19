@@ -1,0 +1,52 @@
+<?php
+    //***********************************************************************************
+    function executeQuery($query) {
+
+       $dbuser = 'uname';
+       $dbpass = 'passwd';
+
+
+	//*** create a connection object
+	$connection = OCILogon($dbuser, $dbpass);
+       if (!$connection) {
+              echo "Couldn't make a connection to Oracle!";
+              exit;
+       }
+
+
+       //*** parse SQL query
+       $statement = OCIParse($connection, $query);
+
+
+       //*** execute SQL query
+	OCIExecute($statement);
+
+
+       //*** get number of columns
+       $num_columns = OCINumCols($statement);
+
+
+	//*** get column headings first
+	print("<table border=0 width=400 align=center>");
+	print("<tr>");
+	for ($i = 1; $i <= $num_columns; $i++)
+		printf("<th  bgcolor=orange> %s </th>", OCIColumnName($statement, $i));
+	print("</tr>");
+
+
+	//*** now print table data
+	while (OCIFetch($statement)){
+		print("<tr>");
+		for ($i = 1; $i <= $num_columns; $i++)
+			printf("<td align=center> %s </td>", OCIResult($statement, $i));
+	       print("</tr>");
+	}
+	print("</table>");
+
+
+	//*** Free the resources associated with this connection
+       OCIFreeStatement($statement);
+       OCILogoff($connection);
+	}
+
+?>

@@ -1,0 +1,145 @@
+<!-- ######################################## -->
+<?php
+      include("header.html");
+?>
+
+
+
+<!-- ######################################## -->
+<?php
+      function newLine($num) {
+         for ($i=1; $i<=$num; $i++)
+             print "<br>";
+      }
+?>
+
+
+
+<!-- ######################################## -->
+<?php
+      function doArrays() {
+
+		  //*** associative array
+		  newLine(3);
+
+		  $users = array('user1'=>'pass1', 'user2'=>'pass2', 'user3'=>'pass3');
+
+		  for ($i=1; $i<=count($users); $i++)
+			 print $users['user'.$i].'<BR>';
+
+
+
+		  //*** regular 1d array
+		  newLine(3);
+
+		  $nums = array();
+
+		  for ($i=0; $i<5; $i++)
+			 $nums[$i] = rand(111,999);
+
+		  foreach ($nums as $x)
+			 print($x."<br>");
+
+
+
+		  //*** regular 2d array
+		  newLine(3);
+
+		  $nums = array();
+
+		  for ($i=0; $i<4; $i++){
+			 $nums[$i] = array();
+
+			 for ($j=0; $j<2; $j++)
+				 $nums[$i][$j] = rand(111,999);
+		  }
+
+		  //*** Print_r($nums);  ugly!
+
+		  for ($i=0; $i<count($nums); $i++){
+			 for ($j=0; $j<count($nums[0]); $j++)
+				 printf("%4d", $nums[$i][$j]);
+
+			 print("<BR>");
+		  }
+
+      }
+?>
+
+
+
+
+<!-- ######################################## -->
+<h3>Person:</h3>
+
+<?php
+      include ("person.php");
+
+      $p1 = new Person('Jack', 32);
+
+      print $p1->display();
+?>
+
+
+
+<!-- ######################################## -->
+<h3>Student:</h3>
+
+<?php
+
+      class Student extends Person {
+
+         //***
+         public $major;
+         public $gpa;
+
+         //***
+         public function Student($name, $age, $major, $gpa) {
+             parent::Person($name, $age);
+
+             $this->major = $major;
+             $this->gpa = $gpa;
+         }
+
+         //***
+         public function display(){
+             return parent::display()."[".$this->major.", ".$this->gpa."]";
+         }
+
+      } //Student
+
+
+      $p2 = new Person('Jill', 30);
+      print $p2->display();
+
+      newLine(3);
+
+      $s1 = new Student('Student', 22, 'CSC', 3.4);
+      print $s1->display();
+
+
+      //*** demonstrates associative, 1D and 2D arrays in PHP
+      newLine(3);
+      doArrays();
+
+
+
+      //*** RegEx in PHP
+      newLine(3);
+
+	  if (preg_match_all("/ain/i", "No pain no GAIN", $matches)) {
+	      echo "A match was found: ";
+	      foreach ($matches as $match)
+	          print_r($match);
+	  } else
+	      echo "No match was found.";
+
+
+      newLine(3);
+	  $tokens = preg_split("/\s+/", "No    pain   no          GAIN");
+	  foreach ($tokens as $token)
+	      print("Token: <b>" . trim($token)."</b> ");
+
+
+
+?>

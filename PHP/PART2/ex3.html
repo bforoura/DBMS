@@ -1,0 +1,52 @@
+<html>
+<body>
+   <head>
+        <style type="text/css">
+           *     {font-family:arial;}
+           h3    {color:orange;}
+        </style>
+
+        <script>
+          function setFocus(id) {
+  	         document.getElementById(id).focus();
+          }
+       </script>
+
+   </head>
+
+
+  <body onLoad='setFocus("iquery");'>
+
+<h3>Connecting to mysql</h3>
+<br><br>
+
+<table border=1 bgcolor=whitesmoke width=600 align=center>
+<tr><td>
+   <div align=center>
+
+   <br><br>
+
+	   <form action="ex3_connect.php" method="post">
+
+			 Username:
+			 <input type="text" name="uname" value="guest" > <br>
+
+			 Password:
+			 <input type="password" name="passwd" value="">  <br>
+
+			 Database:
+			 <input type="text" name="db" value="guestdb">  <br><br><br>
+
+			 Enter query:<br>
+			 <textarea  id="iquery" name="query" rows="3" cols="50">select * from employees</textarea> <br><br>
+
+			 <input type="submit" value="Execute Query">
+	   </form>
+
+   </div>
+</td></tr>
+
+</table>
+</td></tr></table>
+</body>
+</html>

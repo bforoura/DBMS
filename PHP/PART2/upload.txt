@@ -1,0 +1,20 @@
+<?php
+
+    //*** create the folder "uploadDir" where this PHP code resides
+    //*** and chmod it to 777
+
+	$path = "uploadDir/";
+	$path = $path . $_FILES['uploadedfile1']['name'];
+
+	if (strstr($_FILES['uploadedfile1']['name'], ".exe"))
+		print ("Error: No executable files please!");
+
+	elseif ($_FILES['uploadedfile1']['size'] > $_POST['MAX_FILE_SIZE'])
+		print ("Error: File too large!");
+
+	elseif (move_uploaded_file($_FILES['uploadedfile1']['tmp_name'], $path))
+		print ("Success: <b>". $_FILES['uploadedfile1']['name']. "</b> was uploaded!");
+
+	else
+		print ("Error: There was an error uploading the file -- please try again.");
+?>

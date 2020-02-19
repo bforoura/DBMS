@@ -1,0 +1,89 @@
+<?php
+    //*************************************** MAIN ************************************
+
+
+
+       //*** do this when form is submitted
+       if (isset($_POST['submit']) && ($_POST['uname'] == 'bforoura') && ($_POST['passwd'] == 'bforoura')) {
+
+         //*** start a new session
+         session_start();
+
+         //*** set a session variable
+         $_SESSION["ValidUser"] = $_POST['uname'];
+
+         //*** redirect when all is well; otherwise, loop here
+         header("Location: welcome.php");
+
+         //*** exit the login page
+         exit;
+         }
+
+       display_login();
+
+?>
+
+
+
+
+
+
+
+
+
+<?php
+   //************************************** FUNCTIONS ***********************************
+
+   //***
+   function myprint($text) {
+      print ("$text \n");
+   }
+
+
+   //*** a bit of style
+   function add_style() {
+       myprint("<style type=text/css> * {font-family:arial;}   h3 {color:orange} </style>");
+   }
+
+
+   //*** add a text box
+   function add_textbox($label, $name) {
+       myprint("$label <input type=text name=$name><br>");
+   }
+
+   //*** add a password box
+   function add_passbox($label, $name) {
+       myprint("$label <input type=password name=$name><br>");
+   }
+
+   //*** do the submit and reset buttons at the same time
+   function add_submit($label) {
+       myprint("<input type=submit name=submit value=$label>");
+       myprint("<input type=reset value=Reset><br>");
+   }
+
+
+   //*** create a new login
+   function display_login() {
+
+     //*** start a new document with style and script
+     myprint("<html><head>");
+     add_style();
+     myprint("</head><body>");
+
+     myprint ("<h3>Login Page</h3>");
+
+     //*** get the form started
+     myprint("<form name=loginForm method=post action=login.php>");
+
+         add_textbox("Username: ", "uname");
+         add_passbox("Password: ", "passwd");
+         add_submit("Login");
+
+     myprint("</form>");
+
+     //*** close document
+     myprint("</body></html>");
+   }
+
+?>
