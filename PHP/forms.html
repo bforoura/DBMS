@@ -1,0 +1,290 @@
+<html>
+	<head>
+	<title>DBMS</title>
+	<link rel=stylesheet type="text/css" href=style.css>
+	</head>
+
+<!------------------------------------------------------>
+<body>
+<div align=center>
+<table border=3 bgcolor=white bordercolor=whitesmoke width=95% align=center><tr><td>
+
+<div align=center>
+<b class=a style="color:#E56905"><h1>Forms and PHP</h1></b>
+<br><br>
+
+</div>
+
+
+
+
+
+<!------------------------------------------------------>
+<br><b class=b>What are forms and CGI vectors?</b>
+
+<table border=1 bgcolor=white width=100%><tr><td align=center>
+<table border=1 cellpadding=5 cellspacing=5 bgcolor=white width=600>
+<!---------- Column headings ----------->
+<tr>
+<td align="center"> <h3> <font face=verdana color="indianred"> HTML Control </font> </h3> </td>
+<td align="center"> <h3> <font face=verdana color="indianred"> HTML Code    </font> </h3> </td>
+</tr>
+
+
+<!---------- Text Box http://cs.sju.edu:35091/department/show.jsp  ----------->
+<form name="form1"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+
+<tr>
+  <td>
+	Text Box: <br>
+	<input type=text name=txbox value="">
+  </td>
+
+  <td align="center">
+        <code>
+	&lt;INPUT TYPE="text" NAME="txbox" VALUE=""> <br><br><br>
+        </code>
+	<input type=submit size="60" value="Show Me">
+  </td>
+</tr>
+</form>
+<!---------- Password Box ----------->
+<form name="form2"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+<tr>
+  <td>
+	Password Box: <br>
+	<input type="password" name="psbox" value="">
+  </td>
+
+  <td align="center">
+        <code>
+	&lt;INPUT TYPE="password" NAME="psbox" VALUE=""> <br><br><br>
+        </code>
+	<input type=submit size="60" value="Show Me">
+  </td>
+</tr>
+
+</form>
+
+<!---------- Check Box ----------->
+<form name="form3"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+<tr>
+  <td>
+	Check Boxes: <br>
+	<input type="checkbox" name="chbox1" value="on">
+	<input type="checkbox" name="chbox2" value="on">
+	<input type="checkbox" name="chbox3" value="on">
+  </td>
+
+  <td align="center">
+	<code>
+	&lt;INPUT TYPE="checkbox" NAME="chbox1" VALUE="on"><br>
+	&lt;INPUT TYPE="checkbox" NAME="chbox2" VALUE="on"><br>
+	&lt;INPUT TYPE="checkbox" NAME="chbox3" VALUE="on"><br><br><br>
+	</code>
+	<input type=submit size="60" value="Show Me">
+  </td>
+</tr>
+</form>
+
+<!---------- Radio Buttons ----------->
+<form name="form4"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+<tr>
+  <td>
+	Radio Buttons <br>
+	<input type="radio" name="rb" value="a" > A
+	<input type="radio" name="rb" value="b"        > B
+	<input type="radio" name="rb" value="c"        > C
+  </td>
+
+  <td align="center">
+	<code>
+	&lt;INPUT TYPE="radio" NAME="rb" VALUE="a"> A <br>
+	&lt;INPUT TYPE="radio" NAME="rb" VALUE="b"> B <br>
+	&lt;INPUT TYPE="radio" NAME="rb" VALUE="c"> C <br><br><br>
+	</code>
+	<input type=submit size="60" value="Show Me">
+  </td>
+</tr>
+</form>
+
+<!---------- Selection Box ----------->
+<form name="form5"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+<tr>
+  <td>
+                Selection Box:<br>
+                <SELECT NAME="selbox">
+                        <OPTION SELECTED> Apples
+                        <OPTION> Oranges
+                        <OPTION> Pears
+                        <OPTION> Cherries
+                </SELECT>
+  </td>
+
+  <td>
+		<code>
+                &lt;SELECT NAME="selbox"> <br>
+                        &lt;OPTION SELECTED> Apples<br>
+                        &lt;OPTION> Oranges <br>
+                        &lt;OPTION> Pears <br>
+                        &lt;OPTION> Cherries <br>
+                &lt;/SELECT> <br><br><br>
+		</code>
+		<center><input type=submit size="60" value="Show Me"></center>
+  </td>
+</tr>
+</form>
+
+
+<!---------- Text Area----------->
+<form name="form6"
+      action="http://cs.sju.edu/~bforoura/forms/show.php"
+      method=get>
+<tr>
+  <td>
+	Text Area: <br>
+	<textarea  name="txarea" rows="5" cols="15" value="">
+</textarea>
+  </td>
+
+  <td>
+        <code>
+	&lt;TEXTAREA  NAME="txarea" ROWS="5" COLS="15"> <br>
+	&lt;/TEXTAREA> <br><br><br>
+        </code>
+	<center> <input type=submit size="60" value="Show Me"> </center>
+  </td>
+</tr>
+</form>
+
+<!---------- Submit Button ----------->
+<tr>
+  <td>
+	Submit Button: <br>
+	<input type=submit size="60" value="Submit">
+  </td>
+
+  <td>
+        <code>
+	&lt;INPUT TYPE="submit" SIZE="60" VALUE="Submit">
+        </code>
+  </td>
+</tr>
+</table>
+
+
+
+
+<br><br>
+<!------------------------------------------------------>
+
+<div align=center>
+<table border=1 bgcolor=whitesmoke width=600 align=center>
+
+<tr><td>
+<xmp>
+   <HTML>
+   <BODY>
+
+   <FORM
+         ACTION=URL of your script
+         METHOD="POST">
+
+         Enter your username:
+         <INPUT TYPE="TEXT" NAME="uname" VALUE="" > <br>
+
+         Enter your password:
+         <INPUT TYPE="PASSWORD" NAME="passwd" VALUE="">  <br>
+
+         Enter your database:
+         <INPUT TYPE="TEXT" NAME="db" VALUE="">  <br>
+
+         Enter your query:<br>
+         <TEXTAREA  NAME="query" ROWS="10" COLS="50"> </TEXTAREA> <br><br>
+
+         <INPUT TYPE="SUBMIT" VALUE="Execute Query">
+   </FORM>
+
+   </BODY>
+   </HTML>
+</xmp>
+</td></tr>
+</table>
+
+<br>
+<b style="color:navy; font-family:verdana; font-size: 18pt">Viewing CGI Vector</b>
+<br><br>
+<table border=1 bgcolor=whitesmoke width=600 align=center>
+<tr><td>
+   <div align=center>
+   <br><br>
+   <FORM NAME="mydbform"
+         ACTION="http://cs.sju.edu/~bforoura/forms/show.php"
+         METHOD="get">
+
+         Username:
+         <INPUT TYPE="TEXT" NAME="uname" VALUE="guest" > <br>
+
+         Password:
+         <INPUT TYPE="PASSWORD" NAME="passwd" VALUE="guest">  <br>
+
+         Database:
+         <INPUT TYPE="TEXT" NAME="db" VALUE="guestdb">  <br><br><br>
+
+         Query:<br>
+         <TEXTAREA  NAME="query" ROWS="3" COLS="50">select * from music</TEXTAREA> <br><br>
+
+         <INPUT TYPE="SUBMIT" VALUE="Show CGI Vector">
+   </FORM>
+   </div>
+</td></tr>
+</table>
+
+
+
+<br>
+<b style="color:navy; font-family:verdana; font-size: 18pt">Running An Actual Script</b>
+<br><br>
+<table border=1 bgcolor=whitesmoke width=600 align=center>
+<tr><td>
+   <div align=center>
+   <br><br>
+   <FORM NAME="mydbform"
+         ACTION="http://maxwell.sju.edu/~bforoura/php/ex3_connect.php"
+         METHOD="post">
+
+         Username:
+         <INPUT TYPE="TEXT" NAME="uname" VALUE="guest" > <br>
+
+         Password:
+         <INPUT TYPE="PASSWORD" NAME="passwd" VALUE="guest">  <br>
+
+         Database:
+         <INPUT TYPE="TEXT" NAME="db" VALUE="guestdb">  <br><br><br>
+
+         Query:<br>
+         <TEXTAREA  NAME="query" ROWS="3" COLS="50" readonly=readonly>select * from music</TEXTAREA> <br><br>
+
+         <INPUT TYPE="SUBMIT" VALUE="Connect to MySQL">
+   </FORM>
+   </div>
+</td></tr>
+</table>
+
+
+</td></tr></table>
+
+
+
+<!------------------------------------------------------>
+</div></td></tr></table></body></html>
