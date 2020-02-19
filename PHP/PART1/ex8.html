@@ -1,0 +1,72 @@
+<html><head>
+
+       <!-- ***************************************** -->
+
+       <title>Example</title>
+
+       <style type="text/css">
+          *
+                {font-family:  arial;}
+
+          div.menuDiv1
+                {
+                 position:    absolute;
+                 background:  whitesmoke;
+                 color:       navy;
+                 visibility:  hidden;
+                 padding:     5 5 5 5;
+                 font-family: arial;
+                }
+       </style>
+
+       <script type="text/javascript" src="ex8_external.js"></script>
+
+
+<!-- ***************************************** -->
+</head><body onUnLoad="display('hide', event);">
+
+    <br><br><br>
+    <br><br><br>
+    <a id="menu1" href="#" onMouseOver="display('show', event);">About Us!</a>
+    <br><br><br>
+
+    <div id="menuItem1" class="menuDiv1"
+         onMouseOver="display('show', event);"
+         onMouseOut ="display('hide', event);">
+
+           <div id="menuItem11"
+                onMouseOver="changeColor('menuItem11', 'silver');"
+                onMouseOut ="changeColor('menuItem11', 'whitesmoke');">
+
+               <a href="http://www.sju.edu">Saint Joseph's University</a>
+           </div>
+           <br>
+
+           <div id="menuItem12"
+                onMouseOver="changeColor('menuItem12', 'silver');"
+                onMouseOut ="changeColor('menuItem12', 'whitesmoke');">
+
+                <a href="http://cs.sju.edu">Computer Science Department</a>
+           </div>
+           <br>
+
+           <div id="menuItem13"
+                onMouseOver="changeColor('menuItem13', 'silver');"
+                onMouseOut ="changeColor('menuItem13', 'whitesmoke');">
+
+                <a href="http://cs.sju.edu/grads/concentration.html">Graduate CSC Program at SJU</a>
+           </div>
+           <br>
+
+           <div id="menuItem14"
+                onMouseOver="changeColor('menuItem14', 'silver');"
+                onMouseOut ="changeColor('menuItem14', 'whitesmoke');">
+
+                <a href="http://cs.sju.edu/undergrads/index.html">Undergraduate CSC Program at SJU</a>
+           </div>
+           <br>
+
+    </div>
+
+
+</body></html>

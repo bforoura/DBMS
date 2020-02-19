@@ -1,0 +1,35 @@
+<html><head>
+
+   <title>Example 11</title>
+
+   <script type="text/javascript">
+      function checkPattern(){
+
+          //*** regular expression defining a pattern
+          var expr =/^\d{5}$/;
+
+          if (document.myForm.myPattern.value.search(expr) == -1) {
+             alert("Please enter a 5-digit number:");
+             return false;
+          }
+          else
+             document.myForm.submit();
+      }
+   </script>
+
+
+<!-- ------------------------------------------------------------- -->
+</head><body>
+
+
+	<form name="myForm"
+	      method=get
+	      action=http://maxwell.sju.edu/~bforoura/php/show.php>
+
+	      Pattern: <input type="text" name="myPattern" size=15>
+
+              <input type="button" value="Submit" onClick = "checkPattern();">
+              <input type="reset"  value="Clear">
+	</form>
+
+</body></html>

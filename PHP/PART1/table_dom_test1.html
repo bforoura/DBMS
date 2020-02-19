@@ -1,0 +1,49 @@
+<html>
+	<head>
+         <script type=text/javascript>
+
+             //*** use only google chrome or firefox
+
+             //*** add a row to table
+             function expand() {
+                 var myTable = document.getElementById("table1");
+                 var numRows = myTable.rows.length;
+
+                 myTable.insertRow(numRows);
+                 myTable.rows[numRows].innerHTML = "<h3>Row " + numRows + "</h3>";
+             }
+
+
+             //*** delete a row
+             function collapse() {
+                 var myTable = document.getElementById("table1");
+                 var numRows = myTable.rows.length;
+
+                 if (numRows > 0)
+                    myTable.deleteRow(numRows-1);
+                 else
+                    return false;
+             }
+
+
+         </script>
+
+	</head>
+<body>
+
+     <a href="javascript:void(0);" onClick="expand();"   style="text-decoration:none">Add Row</a> |
+     <a href="javascript:void(0);" onClick="collapse();" style="text-decoration:none">Delete Row</a>
+
+     <table id="table1" align=center width=800px bgcolor=whitesmoke>
+        <tr>
+           <td>
+                <h3>Row 0</h3>
+           </td>
+        </tr>
+
+
+     </table>
+     End of Table
+
+</body>
+</html>

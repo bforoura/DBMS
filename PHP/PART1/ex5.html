@@ -1,0 +1,39 @@
+<html>
+
+    <!-- ***************************************** -->
+    <head>
+
+       <title>Example</title>
+
+
+       <script type="text/javascript">
+
+          var x = 22;
+          var z = 44;
+
+          function f1() {
+
+               x = "7";
+               alert('x in f1: ' + x);
+          }
+
+          function f2() {
+
+               x = new Array(4);
+               for (i=0; i<x.length; i++)
+                   x[i] = i+1;
+
+               alert('x in f1: ' + x);
+          }
+
+       </script>
+
+    </head>
+
+
+
+<!-- ***************************************** -->
+<body onLoad="f1();f2();">
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+
+    <!-- ***************************************** -->
+    <head>
+
+       <title>Example</title>
+
+       <style type="text/css">
+           .div1
+                {
+                position:   absolute;
+                top:        100px;
+                left:       0;
+                background: red;
+                width:      100px;
+                height:     100px;
+                visibility: visible;
+                }
+       </style>
+
+
+       <script type="text/javascript">
+
+          var images = new Array(5);
+          images[0] = "http://cs.sju.edu/faculty/images/mkrueger.jpg";
+          images[1] = "http://cs.sju.edu/faculty/images/bforoura.jpg";
+          images[2] = "http://cs.sju.edu/faculty/images/ggrevera.jpg";
+          images[3] = "http://cs.sju.edu/faculty/images/swei.jpg";
+          images[4] = "http://cs.sju.edu/faculty/images/hchu.jpg";
+
+          function display(){
+
+              var val = document.getElementById("faculty").value;
+
+              if (val<0 || val >4 || isNaN(val) )
+                  document.getElementById("myDiv").style.background = "red";
+              else
+
+                  document.getElementById("myDiv").style.background="url("+images[val]+")";
+          }
+
+
+       </script>
+
+    </head>
+
+
+
+<!-- ***************************************** -->
+<body>
+
+   <a href="#" onClick="display();">Show Faculty</a>
+
+   <form name="myForm">
+      <input type=text id=faculty>
+   </form>
+
+   <div id="myDiv" class=div1>
+   </div>
+
+</body>
+</html>

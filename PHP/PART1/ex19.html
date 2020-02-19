@@ -1,0 +1,94 @@
+<html>
+<head><title>Example 19: Elements</title>
+
+   <style type="text/css">
+      *
+          {font-family:   arial;}
+
+
+      div.foo
+          {
+              width:      400;
+              height:     20;
+              background: orange;
+              border:     1px solid black;
+          }
+
+   </style>
+
+
+
+   <script type="text/javascript" src="clientcide-trunk-2.1.0.js">
+   </script>
+
+
+   <script type="text/javascript">
+
+
+
+       //*** Elements Fx plugin *************************************
+       function elementEffect() {
+
+               var myElementsEffects = new Fx.Elements($$('div.foo'));
+               myElementsEffects.start({
+
+                    '0': { //*** change the first element's opacity and width
+                          'opacity': [0,1],
+                          'width':   [10,400]
+                         },
+
+
+                    '1': { //*** change the second element's opacity
+                           'opacity': [0.9, 0.1]
+                         },
+
+
+                    '2': { //*** change the third element's height	*
+                           'height': [80, 20]
+                         }
+
+                    });
+       }
+
+
+
+       //*** Drag Effect ************************************************
+       function dragEffect() {
+
+
+              var myDraggable = new Drag.Move($('dragBox'),
+                                {
+                                   snap:       20,
+                                   container: 'snapContainer'
+                                });
+
+       }
+
+
+
+   </script>
+
+<!-- -------------------------------------------------- -->
+</head><body>
+
+
+
+<a href="#" onClick="elementEffect();">Show Multiple Elements Effect</a> |
+<a href="#" onClick="dragEffect();">Drag Effect</a>
+
+<br><br><br><br><br><br>
+
+
+<div class="foo"></div><br>
+<div class="foo"></div><br>
+<div class="foo"></div><br>
+
+
+
+<div id="snapContainer" style="height: 150px; width: 400px; border: 1px solid black;">
+	<div id="dragBox" style="background: yellow; height: 80px; width: 80px; border: 1px solid black;text-align:center">Drag Me</div>
+</div>
+
+
+
+</body></html>

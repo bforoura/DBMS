@@ -1,0 +1,45 @@
+<html>
+
+    <!-- ***************************************** -->
+    <head>
+
+       <title>Hello Example</title>
+
+       <style type="text/css">
+           div.div1
+                {
+                 position:   absolute;
+                 top:        200px;
+                 left:       200px;
+                 width:      400px;
+                 height:     200px;
+                 background: orange;
+                 color:      navy;
+                }
+       </style>
+
+       <script type="text/javascript">
+
+          //*** display information about document
+          function display() {
+
+               alert(document.getElementById("myDiv1").innerHTML);
+          }
+       </script>
+
+    </head>
+
+
+
+<!-- ***************************************** -->
+<body>
+
+    <a href="#" onClick="display();">Display Information</a>
+
+
+    <div id="myDiv1" class=div1>
+        Text in a division.
+    </div>
+
+</body>
+</html>

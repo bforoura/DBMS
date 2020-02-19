@@ -1,0 +1,96 @@
+<html>
+	<head>
+	     <style type=text/css>* {font-family:arial;}</style>
+
+         <script type=text/javascript>
+
+             //*** use only google chrome or firefox
+             var row_ptr = 0;
+
+             //**************************************************************
+             //*** DOM only has insertBefore() and appendChild()
+             //**************************************************************
+             Node.prototype.insertAfter = function (newNode, referenceNode) {
+
+                if (referenceNode.nextSibling) {
+                    return this.insertBefore(newNode, referenceNode.nextSibling);
+                } else
+                    return this.appendChild(newNode);
+             }
+
+
+             //**************************************************************
+             //*** add a new top row to the table
+             //**************************************************************
+             function expand() {
+
+                 var myTable = document.getElementById("table1");
+
+                 for (i=0; i<myTable.childNodes.length; i++)
+                    if (myTable.childNodes[i].nodeName.toLowerCase() == 'tbody') {
+                        var root = myTable.childNodes[i];
+
+                        var newTR = document.createElement('tr');
+                        var newTD = document.createElement('td');
+                        var newH3 = document.createElement('h3');
+                        var newTEXT = document.createTextNode('New Row ' + (row_ptr++));
+
+                        try {
+                              root.insertAfter(newTR, root.childNodes[1]);
+                              newTR.appendChild(newTD);
+                              newTD.appendChild(newH3);
+                              newH3.appendChild(newTEXT);
+                        }
+                        catch (exception) {
+                              alert (exception.description);
+                        }
+                    }
+             }
+
+             //**************************************************************
+             //*** delete the last row from table
+             //**************************************************************
+             function collapse() {
+
+                 var myTable = document.getElementById("table1");
+
+                 for (i=0; i<myTable.childNodes.length; i++)
+                    if (myTable.childNodes[i].nodeName.toLowerCase() == 'tbody') {
+                        var root = myTable.childNodes[i];
+
+                        try {
+                              if (root.childNodes.length > 2)
+                                 root.removeChild(root.childNodes[root.childNodes.length-1]);
+                              else
+                                 row_ptr=0;
+                        }
+                        catch (exception) {
+                              alert(exception.description);
+                        }
+                    }
+             }
+
+
+         </script>
+
+<!-- ************************************************************************* -->
+<body>
+
+     <a href="javascript:void(0);" onClick="expand();"   style="text-decoration:none">Add Row</a> |
+     <a href="javascript:void(0);" onClick="collapse();" style="text-decoration:none">Delete Row</a>
+
+     <table id="table1" align=center width=800px bgcolor=whitesmoke>
+        <caption>Rows Start Here</caption>
+        <tbody>
+           <tr>
+              <td>
+                   <h3>Original Row is Fixed</h3>
+              </td>
+           </tr>
+        </tbody>
+     </table>
+
+     <div align=center>Rows End Here</div>
+
+</body>
+</html>

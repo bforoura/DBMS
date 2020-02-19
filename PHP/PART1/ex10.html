@@ -1,0 +1,43 @@
+<html><head>
+     <title>Example 10</title>
+</head><body>
+
+<img src=ex10.jpg>
+
+<menu id="menu" style="visibility: hidden">
+
+  <item>
+    <name>Saint Joseph's University</name>
+    <link>http://www.sju.edu</link>
+  </item>
+
+  <item>
+    <name>Computer Science Department</name>
+    <link>http://cs.sju.edu</link>
+  </item>
+
+</menu>
+
+
+
+<script type="text/javascript">
+     var root = document.getElementById('menu');
+
+     for (i=0; i<root.childNodes.length; i++)
+        alert('* child ' + i + ': ' + root.childNodes[i].nodeName.toLowerCase());
+
+
+     for (i=0; i<root.childNodes.length; i++)
+        if (root.childNodes[i].nodeName.toLowerCase()=='item') {
+           var aNode = root.childNodes[i];
+
+           for (j=0; j<aNode.childNodes.length; j++)
+                alert('** grandchild ' + j + ': ' + aNode.childNodes[j].nodeName.toLowerCase());
+        }
+
+</script>
+
+</body>
+</html>
+
+

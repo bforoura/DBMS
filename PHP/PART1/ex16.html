@@ -1,0 +1,87 @@
+<html>
+<head><title>Example 16</title>
+
+   <script type="text/javascript" src="clientcide-trunk-2.1.0.js">
+   </script>
+
+   <script type="text/javascript">
+
+      function go() {
+
+		var Animal = new Class({
+			initialize: function(options){
+				this.options = options;
+				this.isAlive = true;
+			}
+		});
+
+
+
+		var Mammal = new Class({
+			Extends: Animal,
+			initialize: function(options){
+				//this executes the initialize() function in the Animal Class
+				//let's also pass the options to the parent's initialize function
+				this.parent(options);
+
+				this.isWarmBlooded = true;
+				this.hasFur = true;
+				this.producesMilk = true;
+			},
+			sleep: function() {
+				this.isAsleep = true;
+			},
+			awake: function(){
+				this.isAsleep = false;
+			}
+		});
+
+
+
+		var Mouse = new Class({
+			Extends: Mammal
+		});
+
+
+
+		var Cat = new Class({
+			Extends: Mammal,
+			initialize: function(options) {
+				//call initialize of Mammal
+				//pass along any options for
+				//the Mammal and Animal classes
+				this.parent(options)
+				this.hasClaws = true;
+				this.hasTail = true;
+				this.isCarnivorous = true;
+			},
+			catchMouse: function(mouse){
+				mouse.isAlive = false;
+				return mouse;
+			}
+		});
+
+
+		var Kitty = new Cat({
+			color: "black"
+		});
+
+		var Mickey = new Mouse({
+			color: "black",
+			pants: true,
+			shoes: true
+		});
+
+		Kitty.catchMouse(Mickey);
+
+		alert(Mickey.isAlive);
+      }
+
+
+   </script>
+
+
+</head><body onLoad="go();">
+
+
+</body></html>

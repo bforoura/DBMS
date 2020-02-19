@@ -1,0 +1,120 @@
+<html>
+<head><title>Example 17: Tween and Morph</title>
+
+   <style type="text/css">
+      *
+          {font-family:   arial;}
+
+      .foo1
+          {
+              background: orange url(nature1.jpg);
+              left:       100px;
+              top:        100px;
+              width:      400;
+              height:     320;
+              position:   absolute;
+          }
+
+
+      .foo2
+          {
+              background: orange url(nature2.jpg);
+              left:       100px;
+              top:        100px;
+              width:      400;
+              height:     320;
+              position:   absolute;
+          }
+
+
+   </style>
+
+   <script type="text/javascript" src="clientcide-trunk-2.1.0.js">
+   </script>
+
+
+   <script type="text/javascript">
+
+       //*** tween the CSS width property ************************************
+       function widthEffect() {
+
+          var exampleFx = new Fx.Tween('fxTarget', {
+                     property:   'width',
+                     duration:   600,
+                     transition: Fx.Transitions.Quad.easeInOut,
+                     link:       'chain'
+                     });
+
+          exampleFx.start(0).start(400).start(0).start(400);
+       }
+
+
+
+       //*** tween the CSS height property ************************************
+       function heightEffect() {
+
+          var exampleFx = new Fx.Tween('fxTarget', {
+                     property: 'height',
+                     duration: 600,
+                     link:     'chain'
+                     });
+
+          exampleFx.start(0).start(320).start(0).start(320);
+       }
+
+
+
+       //*** tween the CSS opacity property ************************************
+       function opacityEffect() {
+
+          var exampleFx = new Fx.Tween('fxTarget', {
+                     property: 'opacity',
+                     duration: 600,
+                     link:     'chain'
+                     });
+
+          for (var i=0; i<2; i++)
+              exampleFx.start(0).start(1);
+       }
+
+
+
+
+       //*** morph the CSS properties width, height and opacity ****************
+       function morphEffect() {
+
+           var exampleFx = new Fx.Morph('fxTarget', {
+                     duration: 600,
+                     link:     'chain'
+                     });
+
+           exampleFx.start({'width':[0,400], 'height':[0,320], 'opacity':[0,1]}).
+                     start({'width':[400,0], 'height':[320,0], 'opacity':[1,0]}).
+                     start({'width':[0,400], 'height':[0,320], 'opacity':[0,1]});
+
+       }
+
+
+
+
+   </script>
+
+<!-- -------------------------------------------------- -->
+</head><body>
+
+
+
+<a href="#" onClick="widthEffect();">Width Effect</a> |
+<a href="#" onClick="heightEffect();">Height Effect</a> |
+<a href="#" onClick="opacityEffect();">Opacity Effect</a> |
+<a href="#" onClick="widthEffect();heightEffect();opacityEffect();">All Three Effects</a> |
+<a href="#" onClick="morphEffect();">Morph Effects</a>
+
+
+
+<div id="fxTarget" class="foo1">
+</div>
+
+
+
+</body></html>

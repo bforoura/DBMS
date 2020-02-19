@@ -1,0 +1,185 @@
+<html><head>
+
+
+       <!-- ***************************************** -->
+
+       <title>Example 9</title>
+
+       <!-- if several elements are stacked over each other the
+             one with the highest style.zIndex will be visible -->
+
+       <style type="text/css">
+          *
+                {font-family:  arial;}
+
+          h1.aHeader
+                {
+                 color:        orange;
+                 text-align:   center;
+                }
+
+
+          div.menuDiv1
+                {
+                 position:    absolute;
+                 background:  whitesmoke;
+                 color:       navy;
+                 visibility:  hidden;
+                 padding:     5 5 5 5;
+                 border:      orange 2px dashed;
+                 z-index:     2;
+                }
+
+          div.window
+                {
+                 position:    absolute;
+                 top:         120;
+                 left:        200;
+                 width:       850;
+                 height:      100%;
+                 z-index:     1;
+                }
+
+       </style>
+
+
+       <script type="text/javascript">
+
+           //*** all global variable decalartions go here
+           var visited = false;
+
+
+           //*** return x and y coords of a screen object *************
+           function findElementCoords(obj) {
+
+               var curleft = curtop = 0;
+
+               if (obj.offsetParent) {
+                   curleft = obj.offsetLeft;
+                   curtop = obj.offsetTop;
+
+                   while (obj = obj.offsetParent) {
+                       curleft += obj.offsetLeft;
+                       curtop += obj.offsetTop;
+                   }
+               }
+
+            return [curtop, curleft];
+           }
+
+
+           //*** display information about document ****************************************
+           function display(mode) {
+
+                //*** find position of "Menu Item 1"
+                position = findElementCoords(document.getElementById('menu1'));
+
+                var myDivision = document.getElementById('menuItem1');
+
+                if (mode=='show'){
+                    myDivision.style.visibility = "visible";
+                    myDivision.style.top        = position[0];
+                    myDivision.style.left       = 100 + position[1]; // move 100 pixels over
+                }
+                else {
+                    myDivision.style.visibility = "hidden";
+                }
+          }
+
+
+          //*** change background color of an element as specified *************************
+          function changeColor(elementID, color) {
+
+               document.getElementById(elementID).style.background=color;
+          }
+
+
+
+          //*** display aPage in the deignated window division *****************************
+          function showURL(aPage) {
+
+               position = findElementCoords(document.getElementById('menu1'));
+
+               var myWindow = document.getElementById("windowID");
+               myWindow.style.top = position[0];
+               myWindow.style.left = 100 + position[1]; // move 100 pixels over
+
+
+               myWindow.innerHTML = "<iframe width=850 height=100% src=" + aPage + "></iframe>";
+          }
+
+
+          //*** pause for 2 seconds and then erase the popup menu ***************************
+          function timedErase() {
+
+              setTimeout("display('hide')",5000);
+          }
+
+       </script>
+
+
+
+<!-- **************************************************************************************** -->
+</head><body onUnLoad="display('hide');">
+
+    <h1 class="aHeader">Welcome to Saint Joseph's University</h1>
+
+    <br>
+    <br>
+    <br>
+
+    <a id="menu1" href="#"
+       onMouseOver="display('show');"
+       onMouseOut="timedErase();">About Us!</a>
+
+    <br><br><br>
+
+    <div id="menuItem1" class="menuDiv1"
+         onMouseOver="display('show');"
+         onMouseOut ="display('hide');">
+
+           <div id="menuItem11"
+                onMouseOver="changeColor('menuItem11', 'silver');"
+                onMouseOut ="changeColor('menuItem11', 'whitesmoke');">
+
+               <a href="#" onClick="showURL('http://www.sju.edu');">
+                  Saint Joseph's University</a>
+           </div>
+           <br>
+
+           <div id="menuItem12"
+                onMouseOver="changeColor('menuItem12', 'silver');"
+                onMouseOut ="changeColor('menuItem12', 'whitesmoke');">
+
+               <a href="#" onClick="showURL('http://cs.sju.edu');">
+                  Computer Science Department</a>
+           </div>
+           <br>
+
+           <div id="menuItem13"
+                onMouseOver="changeColor('menuItem13', 'silver');"
+                onMouseOut ="changeColor('menuItem13', 'whitesmoke');">
+
+               <a href="#" onClick="showURL('http://cs.sju.edu/grads/concentration.html');">
+                  Graduate CSC Program at SJU</a>
+           </div>
+           <br>
+
+           <div id="menuItem14"
+                onMouseOver="changeColor('menuItem14', 'silver');"
+                onMouseOut ="changeColor('menuItem14', 'whitesmoke');">
+
+               <a href="#" onClick="showURL('http://cs.sju.edu/undergrads/bscs.html');">
+                  Undergraduate CSC Program at SJU</a>
+           </div>
+           <br>
+
+    </div>
+
+
+
+    <div  id="windowID" class="window">
+    </div>
+
+
+</body></html>

@@ -1,0 +1,82 @@
+<html><head>
+
+       <!-- ***************************************** -->
+
+       <title>Example</title>
+
+       <style type="text/css">
+          div.menuDiv1
+                {
+                 position:   absolute;
+                 background: whitesmoke;
+                 color:      navy;
+                 visibility: hidden;
+                 padding:    5 5 5 5;
+                }
+       </style>
+
+       <script type="text/javascript">
+
+          //*** all global variable decalartions go here
+          var visited = false;
+
+          //*** return x and y coords of a screen object *************
+          function findElementCoords(obj) {
+
+            var curleft = curtop = 0;
+
+            if (obj.offsetParent) {
+               curleft = obj.offsetLeft;
+               curtop = obj.offsetTop;
+
+               while (obj = obj.offsetParent) {
+                   curleft += obj.offsetLeft;
+                   curtop += obj.offsetTop;
+               }
+            }
+
+          return [curtop, curleft];
+          }
+
+
+          //*** display information about document ********************
+          function display(mode, event) {
+
+               //*** find position of "Menu Item 1"
+               position = findElementCoords(document.getElementById('menu1'));
+
+               var myDivision = document.getElementById("menuItem1");
+
+               if (mode=='show'){
+                  myDivision.style.visibility = "visible";
+                  myDivision.style.top        = position[0];
+                  myDivision.style.left       = 100 + position[1]; // move 100 pixels over
+               }
+               else
+                  myDivision.style.visibility = "hidden";
+
+          }
+       </script>
+
+
+<!-- ***************************************** -->
+</head><body>
+
+    <br><br><br>
+    <br><br><br>
+    <a id="menu1" href="#" onMouseOver="display('show', event);">Menu Item 1</a>
+    <br><br><br>
+
+    <div id="menuItem1" class="menuDiv1"
+                        onMouseOver="display('show', event);"
+                        onMouseOut ="display('hide', event);">
+
+           <a href="#">Submenu Item 1.1</a><br>
+           <a href="#">Submenu Item 1.2</a><br>
+           <a href="#">Submenu Item 1.3</a><br>
+           <a href="#">Submenu Item 1.4</a><br>
+
+    </div>
+
+
+</body></html>

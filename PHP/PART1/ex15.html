@@ -1,0 +1,35 @@
+<html>
+<head><title>Example 15</title>
+
+
+</head><body>
+
+
+   <script type="text/javascript">
+
+       //*** ['cat', 'dog', 'bear', 'elephant'].forEach( function(animal) {alert(animal);});
+
+
+
+       var animals = {
+
+            preds:   ['cat', 'dog', 'bear', 'elephant'],
+            weapons: ['purring', 'teeth', 'paws', 'trunk'],
+
+
+            kill: function() {
+				this.weapons.forEach(function(weapon) {
+
+					alert('this animal can kill with its ' + weapon);});
+            } // kill
+
+
+        };  // animals
+
+
+		animals.kill();
+
+
+ </script>
+
+</body></html>

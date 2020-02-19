@@ -1,0 +1,26 @@
+<html>
+<head><title>Example 13</title>
+
+
+</head><body>
+
+
+   <script type="text/javascript">
+
+      var myCar = new Object();
+
+      myCar.make   = "Toyota";
+      myCar.model  = "Camry";
+      myCar.year   = 2009;
+
+      //*** an abbrevation for object instantiation and initialization
+      myCar.engine = {config:  "V6",  hp:   340};
+
+      alert(myCar.make + ' ' + myCar.model + ' ' + myCar.year + ' ' + myCar.engine.config);
+
+      for (prop in myCar)
+         document.write("Name: " , prop, ";  Value:  ", myCar[prop], "<br />");
+
+ </script>
+
+</body></html>

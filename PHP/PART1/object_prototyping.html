@@ -1,0 +1,59 @@
+<html>
+
+
+<head>
+   <script type=text/javascript>
+
+      function start() {
+
+          //*** object creation
+          var person = new Object();
+
+          person.name = "";
+          person.address = "";
+          person.birth_year = 0;
+          person.age = function () {
+                          return new Date().getFullYear() - this.birth_year;
+                       };
+
+
+          //*** object instantiation and prototyping
+          var husband = new Object(person);
+
+          husband.name="Jack Smith";
+          husband.address = "123 Main Street, Anytown, USA";
+          husband.birth_year = '1970';
+          alert (husband.name + ', ' + husband.address + ', ' + husband.age());
+
+
+
+
+          //*** system object prototyping
+          Date.prototype.getAge = function(year) {
+                                     return new Date().getFullYear() - year;
+                                 }
+
+          //*** object instantiation, prototyping, and method overriding
+          var wife = new Object(person);
+
+          wife.name="Jane Smith";
+          wife.address = "123 Main Street, Anytown, USA";
+          wife.birth_year = '1972';
+          wife.age = function () {
+                          return new Date().getAge(this.birth_year) - 5;
+                       };
+          wife.job = "accountant";
+
+          alert (wife.name + ', ' + wife.address + ', ' + wife.age() + ', ' + wife.job);
+
+      }
+
+
+   </script>
+
+
+</head>
+
+<body onLoad = "start();">
+</body>
+</html>

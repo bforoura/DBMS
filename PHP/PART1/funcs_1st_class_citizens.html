@@ -1,0 +1,40 @@
+<html>
+
+
+<head>
+   <script type=text/javascript>
+
+   function add (x, y) {
+     return x + y;
+   }
+
+
+   function sub (x, y) {
+     return x - y;
+   }
+
+
+   function apply (f1, f2, flag) {
+     if (flag == 1)
+         return f1 (10, 20);
+     else
+         return f2 (10, 20);
+   }
+
+
+   function start() {
+
+      var flag = prompt("Enter a number (1-2): ");
+
+
+      alert(apply (add, sub, flag));
+   }
+
+   </script>
+
+
+</head>
+
+<body onLoad = "start();">
+</body>
+</html>

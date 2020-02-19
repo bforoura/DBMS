@@ -1,0 +1,106 @@
+<html>
+<head><title>Example 18: Plugins</title>
+
+   <style type="text/css">
+      *
+          {font-family:   arial;}
+
+      .foo1
+          {
+              background: orange;
+              width:      100;
+              height:     100;
+              border:     1px solid black;
+          }
+
+
+      .foo2
+          {
+              left:       100;
+              top:        100;
+              width:      400;
+              height:     300;
+              position:   absolute;
+              border:     1px solid black;
+          }
+
+   </style>
+
+
+
+   <script type="text/javascript" src="clientcide-trunk-2.1.0.js">
+   </script>
+
+
+   <script type="text/javascript">
+
+
+
+       //*** Slide in plugin *************************************
+       function slideInEffect() {
+
+       var mySlider = new Fx.Slide('fxTarget', {duration: 200});
+
+            mySlider.slideIn()
+       }
+
+
+
+       //*** Slide out plugin ************************************
+       function slideOutEffect() {
+
+       var mySlider = new Fx.Slide('fxTarget', {duration: 200});
+
+            mySlider.slideOut()
+       }
+
+
+       //*** Toggle plugin ***************************************
+       function toggleEffect() {
+
+       var mySlider = new Fx.Slide('fxTarget', {duration: 200});
+
+            mySlider.toggle()
+       }
+
+
+
+       //*** Hide plugin *****************************************
+       function hideEffect() {
+
+       var mySlider = new Fx.Slide('fxTarget', {duration: 200});
+
+            mySlider.hide()
+       }
+
+
+
+       //*** Show plugin *****************************************
+       function showEffect() {
+
+       var mySlider = new Fx.Slide('fxTarget', {duration: 200});
+
+            mySlider.show()
+       }
+
+   </script>
+
+<!-- -------------------------------------------------- -->
+</head><body>
+
+
+
+<a href="#" onClick="slideInEffect();">Slide In</a> |
+<a href="#" onClick="slideOutEffect();">Slide Out</a> |
+<a href="#" onClick="toggleEffect();">Toggle</a> |
+<a href="#" onClick="hideEffect();">Hide</a> |
+<a href="#" onClick="showEffect();">Show</a>
+
+<div class="foo2">
+   <div id="fxTarget" class="foo1">
+   </div>
+</div>
+
+
+
+</body></html>
