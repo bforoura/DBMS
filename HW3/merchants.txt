@@ -1,0 +1,5 @@
+1,Acer,San Jose,California
+2,Apple,Cupertino,California
+3,HP,Palo Alto,California
+4,Dell,Round Rock,Texas
+5,Lenovo,Research Triangle Park,North Carolina
