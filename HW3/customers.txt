@@ -1,0 +1,20 @@
+1,Uriel Whitney,Corona,Alabama
+2,Justin Mccray,Cedar Falls,Vermont
+3,Wynne Mckinney,Mobile,Virginia
+4,Harlan Barrera,Glendale,South Carolina
+5,Jerry Roberts,Idaho Falls,New York
+6,Charde Mcgee,Glendora,Kentucky
+7,Inez Long,Fort Wayne,Virginia
+8,Uma Holland,Decatur,New Mexico
+9,Haviva Stewart,Buena Park,Oklahoma
+10,Nissim Rosa,Nenana,Nebraska
+11,Caryn Merritt,Waycross,Kansas
+12,Clementine Travis,Santa Fe Springs,Washington
+13,Larissa Lambert,Redding,Nevada
+14,Gray Perkins,Provo,Maryland
+15,Abraham Sears,Vacaville,Minnesota
+16,Eleanor Alston,Fort Collins,South Dakota
+17,Dean Heath,Palmdale,Connecticut
+18,Colby George,Sioux Falls,Virginia
+19,Brynn Haney,Mechanicville,New Mexico
+20,Demetrius Garcia,Fort Dodge,North Dakota
