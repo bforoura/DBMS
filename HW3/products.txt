@@ -1,0 +1,32 @@
+1,Hard Drive,Peripheral,640GB USB 2.0 Portable
+2,Monitor,Peripheral,LED 22-inch Backlit  
+3,Printer,Peripheral,All-in-one
+4,Super Drive,Peripheral,8X DVD-ROM 32X CD-ROM SATA Internal Blu-ray Drive BR-04B2T
+5,Hard Drive,Peripheral,2TB Internal SATA
+6,Laptop,Computer,Intel Core i5-2410M 2.3GHz / 4GB RAM / 640GB Hard Drive / Blu-ray / Intel HD Graphics / 802.11n / Bluetooth / Webcam / HDMI / Windows 7 Home Premium
+7,Super Drive,Peripheral,DVD+R 8X DVD+RW 22X DVD-R 16X DVD-ROM 48X CD-ROM Internal Drive
+8,Router,Networking,Gigabit Router with USB for Windows and Linux
+9,Monitor,Peripheral,23-inch HD Widescreen
+10,Network Card,Networking,Wireless a/b/g/n
+11,Super Drive,Peripheral, External CD/DVD R/RW USB
+12,Network Card,Networking,100Mbps Full/Low Profile Ethernet Multi Mode SC Fiber PCI NIC Card
+13,Network Card,Networking,Livewire Powerline AV Kit
+14,Monitor,Peripheral,27-inch LED
+15,Printer,Peripheral,Black & White Laser Multifunction Printer
+16,Ethernet Adapter,Networking,High Performance Wireless-N Adapter
+17,Desktop,Computer,Intel Core i7-2630QM 2.00GHz / 8GB RAM / 2TB HD / Blu-ray Reader / GeForce GT 540M Graphics / 802.11n / HDMI / TV Tuner / USB 3.0 / Windows 7 Home Premium
+18,Router,Networking,Wireless-G Broadband Router with VPN
+19,Router,Networking,Wireless Dual Band Gigabit Router
+20,Router,Networking,Wireless N HD Media Router 1000 DIR-657
+21,Super Drive,Peripheral,12x Internal Blu-ray Disc/DVD/CD Writer
+22,Super Drive,Peripheral,DVD/CD/RW IDE 
+23,Router,Networking,54 Mbps 4-port Wireless 802.11g DSL Router
+24,Laptop,Computer, 1.66GHz Processor / 2GB RAM / 250GB Hard Drive / Intel GMA 3150 / 802.11n / Webcam / 6-cell Li-ion battery / Windows 7 Starter
+25,Laptop,Computer,Core i7 /17.3 / 750/8GB PC HP 8760w Core i7-2720QM CPU 17.3 FHD AG LED UWVA 2GB nVidia Webcam 8GB 1333DDR3 RAM(2D) 750GB HDDDVD+/-RW 802.11a/b/g/n I3 BT FPR Windows 7 PRO 64 OF10 STR U.S. - English localization
+26,Printer,Peripheral,Color Laser
+27,Network Card,Networking,24 Port Gigabit Rackmount
+28,Network Card,Networking,MegaPlug AV 200 Mbs
+29,Hard Drive,Peripheral,500GB Red-Hot Skin Portable 
+30,Super Drive,Peripheral,USB 2.0 Slot-Loading Portable DVD Super Multi Drive
+31,Super Drive,Peripheral,External CD/DVD/RW
+32,Super Drive,Peripheral,UInternal CD/DVD/RW
