@@ -1,5 +1,5 @@
 -- Forouraghi
--- CSC DBMS
+-- CSC DBMS 
 
 -- This example demonstrates:
 
