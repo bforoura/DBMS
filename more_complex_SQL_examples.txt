@@ -160,6 +160,19 @@ from departments d, employees e,
 where d.manager_id = e.emp_id
 and d.dept_id = c.dept_id;
 
+-- Alternatively we can use a temporary table for holding intermediate results. For example,
+
+WITH temp AS
+(select dept_id, count(*) as emp_cnt
+                               from employees
+                               group by dept_id
+                              );
+
+select d.name as "Department Name", e.f_name || ' ' || e.l_name as "Manager Name", c.emp_cnt as "Number of Employees"
+from departments d, employees e, temp c
+where d.manager_id = e.emp_id
+and d.dept_id = c.dept_id;
+
 
 
 
