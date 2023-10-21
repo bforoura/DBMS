@@ -1,4 +1,4 @@
-//*** server1 shows how a simple CGI variables can be retrieved
+//*** server1 shows how a simple CGI variable can be retrieved
 
 const express = require("express");
 const app = express();
@@ -14,3 +14,5 @@ app.get("/", function (req, res) {
 app.listen(port, function () {
   console.log("Example app listening on port ${port}!");
 });
+
+
