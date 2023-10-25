@@ -80,13 +80,13 @@ app.post("/search", function (req, res) {
 
 			      //*** print column headings
 			      html_body = html_body + "<TR>";
-				  for (var i = 0; i < fields.length; i++)
+                 for (var i = 0; i < fields.length; i++)
 				    html_body = html_body + ("<TH>" + fields[i].name.toUpperCase() + "</TH>");
 				  html_body = html_body + "</TR>";
 
                   //*** prints rows of table data
 				  for (var i = 0; i < result.length; i++)
-				       html_body = html_body + ("<TR><TD>" + result[i].title + "</TD>"+"<TD>" + result[i].description + "</TD></TR>");
+				       html_body = html_body + ("<TR><TD>" + result[i].title + "</TD>" + "<TD>" + result[i].description + "</TD></TR>");
 
                   html_body = html_body + "</TABLE>";
 
