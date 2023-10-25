@@ -41,7 +41,7 @@ app.get("/", function (req, res) {
 
 //*** wait indefinitely in a loop
 app.listen(port, function () {
-  console.log("Example app listening on port ${port}!");
+  console.log("Example app listening on port port " + port);
 });
 
 
