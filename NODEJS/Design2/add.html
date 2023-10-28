@@ -1,0 +1,53 @@
+<html>
+<body style="font-family:arial">
+
+<img src="https://i.ytimg.com/vi/w8hSzA5r5P4/maxresdefault.jpg" width=520 height=180></img>
+
+<BR><BR>
+<FORM NAME="search" ACTION="http://localhost:3000/add" METHOD="post">
+
+     <fieldset style="width: 500px">
+         <legend><b>Course</b></legend>
+         <br><br>
+
+          Title:
+         <INPUT TYPE="TEXT" NAME="title" VALUE="" >
+         <br><br>
+
+          Description:
+         <INPUT TYPE="TEXT" NAME="detail" VALUE="" >
+         <br><br>
+
+         Credits:
+                <SELECT NAME="credits">
+                        <OPTION SELECTED>1</OPTION>
+                        <OPTION>2</OPTION>
+                        <OPTION>3</OPTION>
+                        <OPTION>4</OPTION>
+                        <OPTION>5</OPTION>
+                </SELECT>
+         <br><br>
+
+
+         Prerequisites:
+         <INPUT TYPE="TEXT" NAME="prereqs" VALUE="None" >
+         <br><br>
+
+         Attribute:
+               <SELECT NAME="attribute">
+                        <OPTION SELECTED>Undergraduate</OPTION>
+                        <OPTION>Graduate</OPTION>
+                </SELECT>
+         <br><br>
+
+
+         <div align="center"><INPUT TYPE="submit" VALUE="Add Course"></div>
+     </fieldset>
+</FORM>
+
+<BR><BR><a href=http://localhost:3000/main>Main Menu</a><BR><BR><BR>
+
+</body>
+</html>
+
+
