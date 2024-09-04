@@ -6,8 +6,8 @@ scores assigned to the teams based on their performance in these experiments.
 
 Each student is identified by a unique ID and has attributes including their name and email address. Each team is also identified by a 
 unique ID and includes a reference to the student who is the team leader. Teams are associated with experiments, and the results of 
-these experiments need to be recorded. Each experiment is identified by a unique ID and includes details such as its name and the 
-date it was conducted.
+these experiments need to be recorded. Each experiment is identified by a non-unique ID (e.g. Exp#1, Exp#2, etc.) and includes details 
+such as its name and the date it was conducted.
 
 The system needs to store the score given to each team for every experiment they participate in. The scores are recorded with 
 unique identifiers and are linked to both the teams and the experiments they pertain to.
