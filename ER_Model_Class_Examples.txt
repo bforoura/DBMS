@@ -1,19 +1,36 @@
-In a programming class, students are organized into teams to conduct various software experiments. Each team is led by one of the students, who acts as the team leader. The class requires a system to track the details of each experiment conducted by the teams and to record the scores assigned to the teams based on their performance in these experiments.
+Problem 1
+=========
+In a programming class, students are organized into teams to conduct various software experiments. Each team is led by one of the students, 
+who acts as the team leader. The class requires a system to track the details of each experiment conducted by the teams and to record the 
+scores assigned to the teams based on their performance in these experiments.
 
-Each student is identified by a unique ID and has attributes including their name and email address. Each team is also identified by a unique ID and includes a reference to the student who is the team leader. Teams are associated with experiments, and the results of these experiments need to be recorded. Each experiment is identified by a unique ID and includes details such as its name and the date it was conducted.
+Each student is identified by a unique ID and has attributes including their name and email address. Each team is also identified by a 
+unique ID and includes a reference to the student who is the team leader. Teams are associated with experiments, and the results of 
+these experiments need to be recorded. Each experiment is identified by a unique ID and includes details such as its name and the 
+date it was conducted.
 
-The system needs to store the score given to each team for every experiment they participate in. The scores are recorded with unique identifiers and are linked to both the teams and the experiments they pertain to.
+The system needs to store the score given to each team for every experiment they participate in. The scores are recorded with 
+unique identifiers and are linked to both the teams and the experiments they pertain to.
 
 Your task is to design an ER model to represent the following information:
-
-Students and their roles as team leaders.
-Teams and the experiments they conduct.
-The scores assigned to each team for each experiment.
+-- Students and their roles as team leaders.
+-- Teams and the experiments they conduct.
+-- The scores assigned to each team for each experiment.
 
 Be sure to define the appropriate entities, their attributes, and the relationships between them, including any dependencies or constraints.
 
 
 
 
+Problem 2
+=========
+In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical 
+tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals 
+also keep logs of the treatments administered to patients, which include details about the doctors providing the treatments, the type of 
+treatment, and the dates on which these treatments are given.
 
-In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals also keep logs of the treatments administered to patients, which include details about the doctors providing the treatments, the type of treatment, and the dates on which these treatments are given.
+
+
+
+
+
