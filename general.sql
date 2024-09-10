@@ -14,17 +14,20 @@
    -- commit and rollback
 
 
-
-
+-- *************************************************************
+-- Safe updates
+-- *************************************************************
+set SQL_SAFE_UPDATES=0;
+set FOREIGN_KEY_CHECKS=0;
 
 -- *************************************************************
 -- Create the first relation
 -- *************************************************************
 create table employees 
 (
-    id     number(4) not null,
+    id     integer(4) not null,
     name   varchar(40),
-    salary number(10,2),
+    salary decimal(10,2),
     constraint id_constr  check (id between 0 and 9999),
     constraint sal_constr check (salary between 0 and 99999999), 
     primary key(id)   
