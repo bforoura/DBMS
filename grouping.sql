@@ -1,6 +1,3 @@
--- Forouraghi
--- DBMS 
-
 -- The examples here demonstrate:
 
    -- format masks
@@ -30,22 +27,7 @@ create table csc621
 );
 
 
-Save this file and load it into csc621 as tab delimited data under 
-
-    SQL>Utilities>Load>Load Text>Existing Table
-
-100	CSC	3.2
-110	CSC	3.4
-120	CSC	3.8
-130	CSC	4.0
-210	MAT	2.9
-220	MAT	2.0
-230	MAT	3.0
-300	ASC	1.0
-310	ASC	1.1
-
-
-
+-- populate the table with these tuples
 select *  from csc621;
 
 ID	MAJOR	GPA
@@ -162,62 +144,26 @@ ID	GPA
 -- Create a new relation sales_data
 -- *************************************************************
 
-
-
-
-save the following  in 'queries.sql':
-
--- --------------------------------------------------------------------------------
-create table sales_data
-(
-    name    varchar(10)   not null,
-    sold    number(4)     check (sold between 0 and 9999),
-    t_date  date          -- transaction date
-);
-
-insert into sales_data values('Keith',   20,  to_date('08/24/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Keith',   40,  to_date('09/15/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Keith',   10,  to_date('12/12/2013', 'MM/DD/YYYY'));
-insert into sales_data values('Mallory', 100, to_date('08/12/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Mallory', 30,  to_date('09/12/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Jason',   300, to_date('08/12/2013', 'MM/DD/YYYY'));
-insert into sales_data values('Jason',  3000, to_date('10/11/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Jon',       2, to_date('08/12/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Jon',     200, to_date('08/12/2013', 'MM/DD/YYYY'));
-insert into sales_data values('Scott',   30,  to_date('08/24/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Scott',   60,  to_date('09/19/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Scott',   90,  to_date('12/20/2013', 'MM/DD/YYYY'));
-insert into sales_data values('Jesse',   120, to_date('08/12/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Jesse',    70, to_date('08/12/2013', 'MM/DD/YYYY'));
-insert into sales_data values('Jeff',     25, to_date('02/10/2014', 'MM/DD/YYYY'));
-insert into sales_data values('Jeff',     85, to_date('06/22/2013', 'MM/DD/YYYY'));
--- --------------------------------------------------------------------------------
-
-Follow instructions provided in class to upload and run the script 'queries.sql'
-
-
-
-
 select * from sales_data;
 
 NAME	SOLD	T_DATE
 =========================
-Keith	20	24-AUG-13
-Keith	40	15-SEP-13
-Keith	10	12-DEC-14
-Mallory	100	12-AUG-13
-Mallory	30	12-SEP-13
-Jason	300	12-AUG-14
-Jason	3000	11-OCT-13
-Jon	2	12-AUG-13
-Jon	200	12-AUG-14
-Scott	30	24-AUG-13
-Scott	60	19-SEP-13
-Scott	90	20-DEC-14
-Jesse	120	12-AUG-13
-Jesse	70	12-AUG-14
-Jeff	25	10-FEB-13
-Jeff	85	22-JUN-14
+Keith	20	24-AUG-23
+Keith	40	15-SEP-23
+Keith	10	12-DEC-24
+Mallory	100	12-AUG-23
+Mallory	30	12-SEP-23
+Jason	300	12-AUG-24
+Jason	3000	11-OCT-23
+Jon	2	12-AUG-23
+Jon	200	12-AUG-24
+Scott	30	24-AUG-23
+Scott	60	19-SEP-23
+Scott	90	20-DEC-24
+Jesse	120	12-AUG-23
+Jesse	70	12-AUG-24
+Jeff	25	10-FEB-23
+Jeff	85	22-JUN-24
 
 
 
@@ -228,37 +174,37 @@ Jeff	85	22-JUN-14
 
 
 -- *************************************************************
--- Display 2013 sales data
+-- Display 2023 sales data
 -- *************************************************************
 
 select *
 from   sales_data
-where  t_date like '%13%';
+where  t_date like '%23%';
 
 NAME	SOLD	T_DATE
 =========================
-Keith	20	24-AUG-13
-Keith	40	15-SEP-13
-Mallory	100	12-AUG-13
-Mallory	30	12-SEP-13
-Jason	3000	11-OCT-13
-Jon	2	12-AUG-13
-Scott	30	24-AUG-13
-Scott	60	19-SEP-13
-Jesse	120	12-AUG-13
-Jeff	25	10-FEB-13
+Keith	20	24-AUG-23
+Keith	40	15-SEP-23
+Mallory	100	12-AUG-23
+Mallory	30	12-SEP-23
+Jason	3000	11-OCT-23
+Jon	2	12-AUG-23
+Scott	30	24-AUG-23
+Scott	60	19-SEP-23
+Jesse	120	12-AUG-23
+Jeff	25	10-FEB-23
 
 
 
 
 
 -- *************************************************************
--- What was the total sales in 2013?
+-- What was the total sales in 2023?
 -- *************************************************************
 
 select sum(sold)
 from   sales_data
-where  t_date like '%13%';
+where  t_date like '%23%';
 
 SUM(SOLD)
 =========
@@ -269,7 +215,7 @@ SUM(SOLD)
 
 select sum(sold)
 from   sales_data
-where  to_char(t_date,'YYYY') = 2013;
+where  to_char(t_date,'YYYY') = 2023;
 
 SUM(SOLD)
 =========
@@ -282,12 +228,12 @@ SUM(SOLD)
 
 
 -- *************************************************************
--- What were the total sales in different months in 2013?
+-- What were the total sales in different months in 2023?
 -- *************************************************************
 
 select to_char(t_date,'MON') as Month, sum(sold) as "Total Sales"
 from   sales_data
-where  to_char(t_date,'YYYY') = 2013
+where  to_char(t_date,'YYYY') = 2023
 group  by to_char(t_date,'MON')
 order  by "Total Sales"
 
@@ -303,7 +249,7 @@ OCT	3000
 
 
 -- *************************************************************
--- What were the total sales in 2013 and 2014?
+-- What were the total sales in 2023 and 2024?
 -- *************************************************************
 
 select to_char(t_date,'YYYY'), sum(sold)
@@ -313,8 +259,8 @@ group  by to_char(t_date,'YYYY');
 
 TO_CHAR(T_DATE,'YYYY')	SUM(SOLD)
 =================================
-2014			755
-2013			3427
+2024			755
+2023			3427
 
 
 
@@ -335,13 +281,13 @@ order by "Year",
 
 Year	Month	Total
 =====================
-2013	AUG	272
-2013	FEB	25
-2013	OCT	3000
-2013	SEP	130
-2014	AUG	570
-2014	DEC	100
-2014	JUN	85
+2023	AUG	272
+2023	FEB	25
+2023	OCT	3000
+2023	SEP	130
+2024	AUG	570
+2024	DEC	100
+2024	JUN	85
 
 
 
@@ -360,22 +306,22 @@ from    sales_data;
 
 T_DATE
 =========
-24-AUG-13
-15-SEP-13
-12-DEC-14
-12-AUG-13
-12-SEP-13
-12-AUG-14
-11-OCT-13
-12-AUG-13
-12-AUG-14
-24-AUG-13
-19-SEP-13
-20-DEC-14
-12-AUG-13
-12-AUG-14
-10-FEB-13
-22-JUN-14
+24-AUG-23
+15-SEP-23
+12-DEC-24
+12-AUG-23
+12-SEP-23
+12-AUG-24
+11-OCT-23
+12-AUG-23
+12-AUG-24
+24-AUG-23
+19-SEP-23
+20-DEC-24
+12-AUG-23
+12-AUG-24
+10-FEB-23
+22-JUN-24
 
 
 
@@ -393,22 +339,22 @@ from      sales_data;
 
 TO_DATE(T_DATE,'DD-MON-YY')
 ===========================
-24-AUG-13
-15-SEP-13
-12-DEC-14
-12-AUG-13
-12-SEP-13
-12-AUG-14
-11-OCT-13
-12-AUG-13
-12-AUG-14
-24-AUG-13
-19-SEP-13
-20-DEC-14
-12-AUG-13
-12-AUG-14
-10-FEB-13
-22-JUN-14
+24-AUG-23
+15-SEP-23
+12-DEC-24
+12-AUG-23
+12-SEP-23
+12-AUG-24
+11-OCT-23
+12-AUG-23
+12-AUG-24
+24-AUG-23
+19-SEP-23
+20-DEC-24
+12-AUG-23
+12-AUG-24
+10-FEB-23
+22-JUN-24
 
 
 
@@ -426,22 +372,21 @@ order by  yr;
 
 YR
 ==
-13
-13
-13
-13
-13
-13
-13
-07
-13
-13
-14
-14
-14
-14
-14
-14
+23
+23
+23
+23
+23
+23
+23
+23
+23
+24
+24
+24
+24
+24
+24
 
 
 
@@ -452,22 +397,22 @@ order by  yr;
 
 YR
 ====
-2013
-2013
-2013
-2013
-2013
-2013
-2013
-2013
-2013
-2013
-2014
-2014
-2014
-2014
-2014
-2014
+2023
+2023
+2023
+2023
+2023
+2023
+2023
+2023
+2023
+2023
+2024
+2024
+2024
+2024
+2024
+2024
 
 
 
@@ -483,8 +428,8 @@ group by  substr(to_char(t_date,'DD-MM-YY'), 7, 2)
 
 YEAR
 ====
-14
-13
+24
+23
 
 
 
@@ -497,8 +442,8 @@ group by  substr(to_char(t_date,'DD-MM-YY'), 7, 2)
 
 YEAR
 ====
-2014
-2013
+2024
+2023
 
 
 
@@ -511,19 +456,19 @@ group by  name, substr(to_char(t_date,'DD-MM-YY'), 7, 2)
 
 NAME	YEAR	Total Sold
 ==========================
-Jason	2014	300
-Scott	2013	90
-Keith	2013	60
-Jon	2013	2
-Jon	2014	200
-Jesse	2013	120
-Jesse	2014	70
-Keith	2014	10
-Jason	2013	3000
-Scott	2014	90
-Mallory	2013	130
-Jeff	2013	25
-Jeff	2014	85
+Jason	2024	300
+Scott	2023	90
+Keith	2023	60
+Jon	2023	2
+Jon	2024	200
+Jesse	2023	120
+Jesse	2024	70
+Keith	2024	10
+Jason	2023	3000
+Scott	2024	90
+Mallory	2023	130
+Jeff	2023	25
+Jeff	2024	85
 
 
 
@@ -599,7 +544,7 @@ Jason	3300
 
 
 -- **********************************************************
--- Who sold the least in 2013?
+-- Who sold the least in 2023?
 -- **********************************************************
 
 
@@ -610,7 +555,7 @@ group by  name
 having    sum(sold)  <= all 
                             (select    sum(sold) 
                              from      sales_data
-                             where     substr(to_char(t_date,'DD-MM-YY'), 7, 2) = '13'
+                             where     substr(to_char(t_date,'DD-MM-YY'), 7, 2) = '23'
                              group by  name)
 
 
@@ -627,18 +572,18 @@ Jon	2
 
 
 -- **********************************************************
--- Who sold the least in 2014?
+-- Who sold the least in 2024?
 -- **********************************************************
 
 
 select    name,  sum(sold) "Total Sold"
 from      sales_data
-where     20 || substr(to_char(t_date,'DD-MM-YY'), 7, 2) like '%14'
+where     20 || substr(to_char(t_date,'DD-MM-YY'), 7, 2) like '%24'
 group by  name
 having    sum(sold)  <= all 
                             (select    sum(sold) 
                              from      sales_data
-                             where     substr(to_char(t_date,'DD-MM-YY'), 7, 2) = '14'
+                             where     substr(to_char(t_date,'DD-MM-YY'), 7, 2) = '24'
                              group by  name)
 order by  name;
 
@@ -655,12 +600,12 @@ Keith	10
 
 select    name,  sum(sold) "Total Sold"
 from      sales_data
-where     to_char(t_date,'YY') like '%14'
+where     to_char(t_date,'YY') like '%24'
 group by  name
 having    sum(sold)  <= all 
                             (select    sum(sold) 
                              from      sales_data
-                             where     to_char(t_date,'YYYY') = 2014
+                             where     to_char(t_date,'YYYY') = 2024
                              group by  name)
 order by  name;
 
