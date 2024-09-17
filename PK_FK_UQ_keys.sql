@@ -15,7 +15,7 @@
    This would fail if SQL_SAFE_UPDATES=1, because it lacks a WHERE clause.
 
 ************************************************************************** */
-set SQL_SAFE_UPDATES=1;
+set SQL_SAFE_UPDATES=0;
 
 
 
@@ -37,7 +37,7 @@ set SQL_SAFE_UPDATES=1;
             Perform operations that might otherwise violate foreign key constraints
         SET FOREIGN_KEY_CHECKS=1;
 ************************************************************************** */
-set FOREIGN_KEY_CHECKS=1;
+set FOREIGN_KEY_CHECKS=0;
 
 
 
