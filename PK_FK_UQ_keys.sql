@@ -114,12 +114,11 @@ create table if not exists take (
     cid int,    -- FK
     
     -- one-to-one mapping
-    -- unique(sid),
-    -- unique(cid),
+    -- unique(sid), unique(cid),
     
     -- avoid duplicate (sid,cid) combinations
     -- many-to-many by default
-    -- unique(sid,cid),
+    unique(sid,cid),
  
  
     -- When you set ON DELETE/UPDATE CASCADE for a foreign key constraint, it means that 
