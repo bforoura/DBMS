@@ -92,7 +92,8 @@ create table if not exists students (
 
 insert into students (sid, name, email) values
 (1, 'Alice', 'alice@example.com'),
-(2, 'Bob',  'bob@example.com');
+(2, 'Bob',  'bob@example.com'), 
+(3, 'Mary',  'mary@example.com');
 
 
 -- **********************************
@@ -103,7 +104,8 @@ create table if not exists courses (
 
 insert into courses (cid, title) values
 (100, 'CSC 281'),
-(200, 'MAT 271');
+(200, 'MAT 271'),
+(300, 'PHL 154');	
 
 
 -- **********************************
