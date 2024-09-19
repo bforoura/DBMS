@@ -6,7 +6,7 @@
    The model consists of three tables: 
    
 	+------------------+          +--------------------+
-	|      Voter       |          |      Candidate     |
+	|      voters      |          |      candidates    |
 	+------------------+          +--------------------+
 	| * voterid (PK)   |          | * candidateid (PK) |
 	|   name           |          |   name             |
@@ -14,7 +14,7 @@
 	|   city           |          +--------------------+
 	+------------------+
 			+----------------+--+
-			|       Vote        |
+			|       votes       |
 			+-----------------+-+
 			| * voterid (FK)    |
 			| * candidateid (FK)|
