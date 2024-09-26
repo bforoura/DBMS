@@ -709,8 +709,11 @@ order by
 
 
 /* ************************************************************************************
-   Query 12 Revisited
-/* ********************************************************************************* */
+   Query 13: Who are the patrons who have checked out the most books from genres 
+   that are considered "popular," based on a defined popularity threshold.
+   
+   Use CTEs this time.
+************************************************************************************ */
 set @popularity_threshold = 8;  -- Set your desired popularity threshold
 
 -- This CTE calculates the total checkouts for each patron who has checked 
@@ -752,6 +755,75 @@ order by
     popular_checkouts.total_checkouts desc;
     
 
-    
-  
+ 
+ 
+/* ************************************************************************************ 
+                            The SQL CASE statement 
+                            
+   -- It allows for conditional logic within queries, enabling users to return different 
+      values based on specific conditions. 
+      
+   -- It can be structured in two main formats
+      -- The simple CASE compares a single expression against multiple values:
+      
+		      select 
+			  name,
+			  case membership_level
+			      when 'basic' then 'Standard Member'
+			      when 'premium' then 'Premium Member'
+			      else 'Unknown Membership'
+			  end as membership_type
+		      from patrons;
+
+
+      -- The searched CASE evaluates a series of Boolean conditions:
+ 
+			 select 
+			     title,
+			     case 
+				 when return_date is not null then 'returned'
+				 when return_date is null and checkout_date < curdate() then 'overdue'
+				 else 'currently checked out'
+			     end as checkout_status
+			from checkout;
+
+
+   -- Each CASE statement consists of WHEN clauses to define conditions, THEN clauses 
+      to specify the results, and an optional ELSE clause for handling unmatched conditions. 
+      
+       
+
+************************************************************************************ */
+
+
+
+/* *****************************************************************************************
+   Query 14: Find out which of the checked-out books are "Returned", "Currently Checked Out" 
+   or "Overdue"
+   
+      -- patrons(patron_id, name, membership_date, email)           NEEDED FOR JOIN
+      -- checkout(book_id, patron_id, checkout_date, return_date)   NEEDED FOR JOIN
+      -- books(book_id, title, published_year, genre_id)            NEEDED FOR JOIN
+      
+      -- authors(author_id, name, birth_year, nationality)
+      -- genres(genre_id, genre_name, desciption, popuarity_rating)
+      -- authors_books(author_id, book_id)                    
+      
+***************************************************************************************** */
+select 
+    b.title,
+    p.name,
+    c.checkout_date,
+    c.return_date,
+    case 
+        when c.return_date is not null then 'returned'
+        when c.return_date is null and c.checkout_date < curdate() then 'overdue'
+        else 'currently checked out'
+    end as checkout_status
+from 
+    checkout c
+join 
+    books b on c.book_id = b.book_id
+join 
+    patrons p on c.patron_id = p.patron_id;
 
