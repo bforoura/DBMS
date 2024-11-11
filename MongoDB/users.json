@@ -1,0 +1,238 @@
+[
+  {
+    "_id": "507f191e810c19729de860ea",
+    "username": "alice",
+    "email": "alice@example.com",
+    "profile": {
+      "bio": "Travel enthusiast.",
+      "location": "New York"
+    },
+    "age": 28,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860ea1",
+        "content": "Exploring the city!",
+        "createdAt": "2020-05-15T12:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860ea2",
+        "content": "Visited the Central Park today!",
+        "createdAt": "2021-08-02T08:30:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860eb",
+      "507f191e810c19729de860ec",
+      "507f191e810c19729de860ed"
+    ],
+    "following": [
+      "507f191e810c19729de860ee",
+      "507f191e810c19729de860ef"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860eb",
+    "username": "bob",
+    "email": "bob@example.com",
+    "profile": {
+      "bio": "Food lover.",
+      "location": "Los Angeles"
+    },
+    "age": 34,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860eb1",
+        "content": "Trying out new recipes!",
+        "createdAt": "2020-06-18T10:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860eb2",
+        "content": "Had an amazing burger today!",
+        "createdAt": "2022-02-03T11:45:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860ea"
+    ],
+    "following": [
+      "507f191e810c19729de860ec",
+      "507f191e810c19729de860ef"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860ec",
+    "username": "charlie",
+    "email": "charlie@example.com",
+    "profile": {
+      "bio": "Tech geek.",
+      "location": "San Francisco"
+    },
+    "age": 29,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860ec1",
+        "content": "Learning MongoDB!",
+        "createdAt": "2021-03-10T08:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860ec2",
+        "content": "Diving into NoSQL databases!",
+        "createdAt": "2023-01-20T09:15:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860ea",
+      "507f191e810c19729de860eb"
+    ],
+    "following": [
+      "507f191e810c19729de860ee",
+      "507f191e810c19729de860f0"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860ed",
+    "username": "dave",
+    "email": "dave@example.com",
+    "profile": {
+      "bio": "Outdoor adventures.",
+      "location": "Denver"
+    },
+    "age": 40,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860ed1",
+        "content": "Hiking in the Rockies!",
+        "createdAt": "2020-07-25T14:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860ed2",
+        "content": "Backpacking through the mountains!",
+        "createdAt": "2022-09-15T16:45:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860ee",
+      "507f191e810c19729de860ef"
+    ],
+    "following": [
+      "507f191e810c19729de860ea"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860ee",
+    "username": "eve",
+    "email": "eve@example.com",
+    "profile": {
+      "bio": "Art lover.",
+      "location": "Chicago"
+    },
+    "age": 26,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860ee1",
+        "content": "Painting my first canvas.",
+        "createdAt": "2021-01-18T15:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860ee2",
+        "content": "Finished a new art project today!",
+        "createdAt": "2023-04-10T10:30:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860ea",
+      "507f191e810c19729de860ed"
+    ],
+    "following": [
+      "507f191e810c19729de860eb",
+      "507f191e810c19729de860ec"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860ef",
+    "username": "frank",
+    "email": "frank@example.com",
+    "profile": {
+      "bio": "Movie buff.",
+      "location": "Seattle"
+    },
+    "age": 31,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860ef1",
+        "content": "Watching a classic film tonight!",
+        "createdAt": "2020-08-21T18:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860ef2",
+        "content": "Rewatching my favorite thriller!",
+        "createdAt": "2022-04-05T12:45:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860ec",
+      "507f191e810c19729de860f0"
+    ],
+    "following": [
+      "507f191e810c19729de860f1"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860f0",
+    "username": "grace",
+    "email": "grace@example.com",
+    "profile": {
+      "bio": "Fitness junkie.",
+      "location": "Miami"
+    },
+    "age": 22,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860f01",
+        "content": "Morning workout complete!",
+        "createdAt": "2020-09-15T07:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860f02",
+        "content": "Yoga session was amazing today!",
+        "createdAt": "2023-07-09T08:00:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860f1",
+      "507f191e810c19729de860f2"
+    ],
+    "following": [
+      "507f191e810c19729de860ee"
+    ]
+  },
+  {
+    "_id": "507f191e810c19729de860f1",
+    "username": "hank",
+    "email": "hank@example.com",
+    "profile": {
+      "bio": "Guitar player.",
+      "location": "Austin"
+    },
+    "age": 35,
+    "posts": [
+      {
+        "postId": "507f191e810c19729de860f11",
+        "content": "Jamming with the band.",
+        "createdAt": "2020-12-01T13:00:00Z"
+      },
+      {
+        "postId": "507f191e810c19729de860f12",
+        "content": "Composing a new song!",
+        "createdAt": "2024-03-22T14:00:00Z"
+      }
+    ],
+    "followers": [
+      "507f191e810c19729de860f2",
+      "507f191e810c19729de860f3"
+    ],
+    "following": [
+      "507f191e810c19729de860f0"
+    ]
+  }
+]

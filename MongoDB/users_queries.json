@@ -1,0 +1,267 @@
+/* **********************************************************************
+    Query 1. Find all users who have a profile location of "New York".
+********************************************************************** */
+
+MDB Shell:				db.users.find({ "profile.location": "New York" })
+
+Compass Query Bar: 		{ "profile.location": "New York" }
+
+
+
+
+/* **********************************************************************
+    Query 2. Find average age of all users.
+********************************************************************** */
+
+[
+  {
+    $group:
+      {
+        _id: null,
+        averageAge: {
+          $avg: "$age"
+        }
+      }
+  }
+]
+
+
+
+
+
+/* **********************************************************************
+    Query 3. Find all the posts made by "bob". (use the username or _id)
+********************************************************************** */
+
+MDB Shell: 	db.users.find({ username: "bob" }, { posts: 1 })
+			db.users.find({ _id: "507f191e810c19729de860eb" }, { posts: 1 })
+
+Compass: Pipeline
+
+[
+  {
+    $match:
+      {
+        username: "bob"
+      }
+  },
+  {
+    $project:
+      {
+        posts: 1
+      }
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 4. Repeat Q3 but rename "posts" as "bobposts"
+********************************************************************** */
+[
+  {
+    $match:
+
+      {
+        username: "bob"
+      }
+  },
+  {
+    $project:
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      {
+        bobposts: "$posts"
+      }
+  },
+  {
+    $project:
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      {
+        "bobposts.content": 1,
+        "bobposts.createdAt": 1
+      }
+  }
+]
+
+
+
+
+
+/* **********************************************************************
+    Query 5. Find names and email addresses of those who follow "alice".
+********************************************************************** */
+[
+  {
+    $match:
+
+      {
+        followers: "507f191e810c19729de860ea"  // Alice's objectID
+      }
+  },
+  {
+    $project:
+      {
+        username: 1,
+        email: 1,
+        _id: 0
+      }
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 6. Count number of followers for each user.
+********************************************************************** */
+[
+  {
+    $project:
+      {
+        username: 1,
+        followerCount: {
+          $size: "$followers"
+        }
+      }
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 7. Find the user with the most followers.
+********************************************************************** */
+
+[
+  {
+    $project:
+      {
+        username: 1,
+        _id: 0,
+        followerCount: {
+          $size: "$followers"
+        }
+      }
+  },
+  {
+    $sort:
+      {
+        followerCount: -1
+      }
+  },
+  {
+    $limit:
+      1
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 8. Display the last post for every user.
+********************************************************************** */
+
+[
+  {
+    $project:
+      {
+        username: 1,
+        lastPost: {
+          $arrayElemAt: ["$posts", -1]
+        }
+      }
+  },
+  {
+    $project:
+      {
+        username: 1,
+        _id: 0,
+        postContent: "$lastPost.content",
+        postDate: "$lastPost.createdAt"
+      }
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 9. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
+********************************************************************** */
+[
+  {
+    $match:
+
+      {
+        "profile.bio": { $regex: "travel", $options: "i"}
+      }
+  },
+  {
+    $project:
+
+      {
+        username: 1,
+        _id: 0,
+        email: 1,
+        profileBio: "$profile.bio"
+      }
+  }
+]
+
+
+
+/* **********************************************************************
+    Query 10. Find users who have at least 2 followers and are following
+              at least 2 people. Then, sort these users by the number of
+              followers they have.
+
+              (Social Media Analytics)
+
+
+	The $size operator is used to get the length of an array,
+	and it doesn't work with comparison operators like $gte directly
+	inside the $size expression.
+
+	Instead, we need to compare the array length directly using the $expr
+	operator or use a $gt condition to filter based on the size of the array.
+
+********************************************************************** */
+
+db.users.aggregate([
+
+  // 1. Match users who have at least 2 followers and are following at least 2 people
+  {
+    $match: {
+      $and: [
+        { $expr: { $gte: [{ $size: "$followers" }, 2] } },  // At least 2 followers
+        { $expr: { $gte: [{ $size: "$following" }, 2] } }   // Following at least 2 people
+      ]
+    }
+  },
+
+  // 2. Add a new field for the follower count (size of the "followers" array)
+  {
+    $addFields: {
+      followerCount: { $size: "$followers" }  // Count the number of followers
+    }
+  },
+
+  // 3. Sort users by follower count (descending order)
+  {
+    $sort: { followerCount: -1 }
+  },
+
+  // 4. Project the final output: username, email, and follower count
+  {
+    $project: {
+      username: 1,
+      email: 1,
+      followerCount: 1,
+      _id: 0
+    }
+  }
+])
