@@ -57,7 +57,7 @@ BEGIN
       LPAD(i, 5, '0'),                   -- Account number as just digits, padded to 5 digits (e.g., 00001, 00002, ...)
       branch_name,                       -- Randomly selected branch name
       ROUND((RAND() * 100000), 2),       -- Random balance between 0 and 100,000, rounded to 2 decimal places
-      account_type                        -- Randomly selected account type (Savings/Checking)
+      account_type                       -- Randomly selected account type (Savings/Checking)
     );
 
     SET i = i + 1;
@@ -115,5 +115,29 @@ AND account_type = 'Savings';
 EXPLAIN SELECT count(*) FROM accounts 
 WHERE branch_name = 'Downtown'
 AND account_type = 'Savings';
+
+
+
+
+
+-- ******************************************************************************************
+-- Timing analysis
+-- ******************************************************************************************
+-- Step 1: Capture the start time with microsecond precision (6)
+SET @start_time = NOW(6);
+
+-- Step 2: Run the query you want to measure
+SELECT count(*) FROM accounts 
+WHERE branch_name = 'Downtown'
+AND account_type = 'Savings';
+
+-- Step 3: Capture the end time with microsecond precision
+SET @end_time = NOW(6);
+
+-- Step 4: Calculate the difference in microseconds
+SELECT 
+    TIMESTAMPDIFF(MICROSECOND, @start_time, @end_time) AS execution_time_microseconds,
+    TIMESTAMPDIFF(SECOND, @start_time, @end_time) AS execution_time_seconds;
+
 
 
