@@ -1,21 +1,25 @@
-/* *****************************************************************************************
+/* **************************************************************************************** */
 -- when set, it prevents potentially dangerous updates and deletes
 set SQL_SAFE_UPDATES=0;
 
 -- when set, it disables the enforcement of foreign key constraints.
 set FOREIGN_KEY_CHECKS=0;
 
--- controls the amount of time (in seconds) that MySQL will wait for a 
--- client (e.g., a connection) to send data before it closes the connection.
-SET GLOBAL wait_timeout = 28800;  -- 8 hours
-
--- it sets the maximum time MySQL will wait to read data from a client 
--- or network before giving up
-SET GLOBAL net_read_timeout = 600; -- 10 minutes
+/* **************************************************************************************** 
+-- These control:
+--     the maximum time (in seconds) that the client will wait while trying to establish a 
+	   connection to the MySQL server 
+--     how long the client will wait for a response from the server once a request has 
+       been sent over
 **************************************************************************************** */
+SHOW SESSION VARIABLES LIKE '%timeout%';       
+SET GLOBAL mysqlx_connect_timeout = 600;
+SET GLOBAL mysqlx_read_timeout = 600;
+
+
+/* **************************************************************************************** */
 -- The DB where the accounts table is created
 use indexing;
-
 
 
 
@@ -30,7 +34,7 @@ CREATE TABLE accounts (
 
 
 /* ***************************************************************************************************
-The procedure generates 10,000 records for the accounts table, with the account_num padded to 5 digits.
+The procedure generates 50,000 records for the accounts table, with the account_num padded to 5 digits.
 branch_name is randomly selected from one of the six predefined branches.
 balance is generated randomly, between 0 and 100,000, rounded to two decimal places.
 ***************************************************************************************************** */
@@ -43,8 +47,8 @@ BEGIN
   DECLARE branch_name VARCHAR(50);
   DECLARE account_type VARCHAR(50);
   
-  -- Loop to generate 10,000 account records
-  WHILE i <= 10000 DO
+  -- Loop to generate 50,000 account records
+  WHILE i <= 50000 DO
     -- Randomly select a branch from the list of branches
     SET branch_name = ELT(FLOOR(1 + (RAND() * 6)), 'Brighton', 'Downtown', 'Mianus', 'Perryridge', 'Redwood', 'RoundHill');
     
@@ -70,13 +74,17 @@ DELIMITER ;
 -- ******************************************************************
 -- execute the procedure
 -- ******************************************************************
-
 CALL generate_accounts();
 
-delete from accounts;
+
 select count(*) from accounts;
 
 select * from accounts limit 10;
+
+select branch_name, count(*)
+from accounts
+group by branch_name
+order by branch_name;
 
 
 -- ******************************************************************
@@ -116,7 +124,8 @@ EXPLAIN SELECT count(*) FROM accounts
 WHERE branch_name = 'Downtown'
 AND account_type = 'Savings';
 
-
+alter table accounts drop primary key;
+alter table accounts add primary key(account_num);
 
 
 
