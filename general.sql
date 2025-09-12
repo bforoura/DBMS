@@ -9,8 +9,7 @@
    -- aggregates (min, max, sum, count)
    -- attribute renaming
    -- subqueries (some, all, any, in)
-   -- dynamic view computation
-   -- order by clause
+
  
 
 
@@ -353,7 +352,7 @@ ID	NAME	SALARY
 -- Updating relations
 -- *************************************************************
 
-*** Give employees a 5% raise; managers receive a 10% raise.
+*** Give employees a 10% raise.
 
 update employees
 set    salary = 1.1 * salary;
@@ -364,136 +363,6 @@ ID	NAME	SALARY
 500	Zeld	44000
 300	Jill	192500
 400	Jack	66000
-
-
-
-
-
-
--- *************************************************************
--- Views are computed dynamically; order by clause
--- *************************************************************
-
-
-create view managers as 
-(
-   select id, name, salary
-   from   employees, (select mid from managed)
-   where  id = mid
-);
-
-select distinct * from managers;
-
-ID	NAME	SALARY
-======================
-300	Jill	175000
-200	Mary	55000
-100	Tim	100000
-
- 
-
-insert into employees values (600, 'Mark', 150000);
-insert into managed   values (600, 100);
-
-
-select distinct * 
-from   managers
-order  by name;
-
-ID	NAME	SALARY
-======================
-300	Jill	175000
-600	Mark	150000
-200	Mary	55000
-100	Tim	100000
-
-
-
-select distinct * 
-from   managers 
-order  by name desc;
-
-ID	NAME	SALARY
-======================
-100	Tim	100000
-200	Mary	55000
-600	Mark	150000
-300	Jill	175000
-
-
-
-
-
-
--- ********************************************************************
--- Rollback to the last committed state
--- By default Oracle commits every operation unless otherwise specified
--- ********************************************************************
-
-
-Check off Autocommit option on top of the SQL command windows
-
-select * from employees;      <===== this is the last committed state
-
-100	Tim	100000
-200	Mary	55000
-300	Jill	175000
-400	Jack	60000
-500	Zeld	40000
-
-
-
-
-
-
-insert into employees values (600, 'Zack', 150000);
-insert into employees values (700, 'Pat',  50000);
-
-select * from employees order by id;
-
-100	Tim	100000
-200	Mary	55000
-300	Jill	175000
-400	Jack	60000
-500	Zeld	40000
-600	Zack	150000
-700	Pat	50000
-
-rollback;
-
-select * from employees order by id;
-
-100	Tim	100000           <===== returns to the last committed state
-200	Mary	55000
-300	Jill	175000
-400	Jack	60000
-500	Zeld	40000
-
-
-
-
-
-
-
-
-insert into employees values (600, 'Zack', 150000);
-insert into employees values (700, 'Pat',  50000);
-
-commit;
-
-rollback;
-
-select * from employees order by id;
-
-100	Tim	100000           <===== returns to the last committed state
-200	Mary	55000
-300	Jill	175000
-400	Jack	60000
-500	Zeld	40000
-600	Zack	150000
-700	Pat	50000
-
-
 
 
 
