@@ -115,7 +115,7 @@ ID	NAME	SALARY
 -- drop view managers;
 
 
--- an updatable view is read-only
+-- a view is read-only
 insert into managers values(600, 'Somebody', 123456);
 
 -- let's check managers and employees now
