@@ -11,7 +11,7 @@
    -- subqueries (some, all, any, in)
    -- dynamic view computation
    -- order by clause
-   -- commit and rollback
+ 
 
 
 -- *************************************************************
@@ -92,11 +92,16 @@ MID	EID
 -- Create/drop a view
 -- *************************************************************
 
+-- A non-materialized view (also simply called a "view") is essentially a 
+-- virtual table that does not store data physically. It just stores the SQL 
+-- query that defines the view. When you query the view, the database re-runs 
+-- the query each time you access it, fetching the data dynamically.
+
 create view managers as 
 (
    select id, name, salary
-   from   employees, (select mid from managed)
-   where  id = mid
+   from  employees
+   where id in (select mid from managed)
 );
 
 select * from managers;
@@ -108,32 +113,16 @@ ID	NAME	SALARY
 100	Tim	100000
 
 
-drop view managers;
+-- drop view managers;
 
-create view managers as 
-(
-   select distinct id, name, salary
-   from   employees, (select mid from managed)
-   where  id = mid
-);
 
+-- an updatable view is read-only
+insert into managers values(600, 'Somebody', 123456);
+
+-- let's check managers and employees now
 
 select * from managers;
-=======================
-ID	NAME	SALARY
-300	Jill	175000
-200	Mary	55000
-100	Tim	100000
-
-
-
-
-
-insert into managers values(600, 'Dumb', 123456);
-ORA-01732: data manipulation operation not legal on this view
-
-
-
+select * from employees;
 
 
 
