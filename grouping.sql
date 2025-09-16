@@ -4,7 +4,6 @@
    -- more on order by
    -- date data type
    -- aliasing columns
-   -- like vs. = for string comparison
    -- more on subqueries
    -- exists
 
