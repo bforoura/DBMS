@@ -52,11 +52,6 @@ SELECT ROUND(AVG(gpa), 2) AS `Class Average` FROM csc621;
 
 
 
-
-select to_char(avg(gpa), '99.99') "Class Average"
-from csc621;
-
-
 -- *************************************************************
 -- What's the average GPA of each group of majors in the class?
 -- *************************************************************
