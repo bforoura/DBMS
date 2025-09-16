@@ -32,28 +32,13 @@ create table employees
     primary key(id)   
 );
 
-
-
 insert into employees values(100, 'Tim',   100000);
 insert into employees values(200, 'Mary',  55000);
 insert into employees values(300, 'Jill',  175000);
 insert into employees values(400, 'Jack',  60000);
 insert into employees values(500, 'Zelda', 40000);
 
-
-
 select * from employees;
-=======================
-ID	NAME	SALARY
-100	Tim	100000
-200	Mary	55000
-500	Zelda	40000
-300	Jill	175000
-400	Jack	60000
-
-
-
-
 
 
 -- *************************************************************
@@ -75,18 +60,6 @@ insert into managed values(300,400);
 insert into managed values(200,500);
 
 
-
-select * from managed;
-=====================
-MID	EID
-100	300
-300	400
-100	200
-200	500
-
-
-
-
 -- *************************************************************
 -- Create/drop a view
 -- *************************************************************
@@ -104,12 +77,6 @@ create view managers as
 );
 
 select * from managers;
-======================
-ID	NAME	SALARY
-300	Jill	175000
-200	Mary	55000
-100	Tim	100000
-100	Tim	100000
 
 
 -- drop view managers;
@@ -131,21 +98,7 @@ select * from employees;
 
 select max(salary) from managers;
 
-MAX(SALARY)
-===========
-175000
-
-
-
-
 select max(salary) as MaxSalary from managers;
-
-MAXSALARY
-=========
-175000
-
-
-
 
 
 -- *************************************************************
@@ -156,12 +109,6 @@ MAXSALARY
 select id 
 from   managers
 where  salary = (select max(salary) from managers);
-
-ID
-===
-300
-
-
 
 
 
@@ -174,13 +121,6 @@ where  mid = (
               from   managers
               where  salary = (select max(salary) from managers)
              );
-
-EID
-===
-400
-
-
-
 
 
 *** Find all information about those managed by the highest-paid manager.
@@ -198,18 +138,6 @@ where  id = (
             );
 
 
-ID	NAME	SALARY
-======================
-400	Jack	60000
-
-
-
-
-
-
-
-
-
 -- *************************************************************
 -- Aggregates in SQL
 -- *************************************************************
@@ -218,23 +146,11 @@ ID	NAME	SALARY
 select min(salary) 
 from employees;
 
-MIN(SALARY)
-===========
-40000
-
-
-
 
 *** Find how many records there are in the relation.
 
 select count(*) 
 from employees;
-
-COUNT(*)
-========
-5
-
-
 
 
 *** Find average salary.
@@ -242,23 +158,10 @@ COUNT(*)
 select sum(salary)/count(salary) as AvgSalary 
 from employees;
 
-AVGSALARY
-=========
-86000
-
-
-
 *** Find average salary.
 
 select avg(salary) 
 from employees;
-
-AVG(SALARY)
-===========
-86000
-
-
-
 
 
 -- *************************************************************
@@ -271,81 +174,29 @@ select id, name, salary
 from employees 
 where salary <= all (select salary from employees);
 
-ID	NAME	SALARY
-======================
-500	Zelda	40000
-
-
-
-
 
 select id, name, salary
 from employees 
 where salary <= some (select salary from employees)
 
-ID	NAME	SALARY
-======================
-500	Zelda	40000
-200	Mary	55000
-400	Jack	60000
-100	Tim	100000
-300	Jill	175000
-
-
-
-
-
 select id, name, salary
 from employees 
 where salary <= some (select salary from employees)
-
-ID	NAME	SALARY
-======================
-500	Zeld	40000
-200	Mary	55000
-400	Jack	60000
-100	Tim	100000
-300	Jill	175000
-
-
-
-
 
 select id, name, salary
 from employees 
 where salary < all (select salary from employees)
-
-
-no data found
-
-
-
 
 select id, name, salary
 from employees 
 where salary = (select min(salary) from employees)   <=== when subqueries returns only one row
                                                           '=' and '= some' and '= any' become
                                                           interchangeable     
-                                
-ID	NAME	SALARY
-======================
-500	Zelda	40000
-
-
-
-
+                              
 
 select id, name, salary
 from employees 
 where salary in (select min(salary) from employees)
-
-ID	NAME	SALARY
-======================
-500	Zelda	40000
-
-
-
-
 
 
 -- *************************************************************
@@ -356,15 +207,6 @@ ID	NAME	SALARY
 
 update employees
 set    salary = 1.1 * salary;
-
-ID	NAME	SALARY
-100	Tim	110000
-200	Mary	60500
-500	Zeld	44000
-300	Jill	192500
-400	Jack	66000
-
-
 
 
 
