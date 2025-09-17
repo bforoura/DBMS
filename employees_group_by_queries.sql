@@ -1,6 +1,3 @@
-Query 0: Build employees table first using the provided script and CSV files:
-=============================================================================
-
 STEP 1: 
 ======
 create table employees (
