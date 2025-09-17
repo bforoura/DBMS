@@ -27,7 +27,7 @@ order by count(*) desc;
 select    company, count(*) as "No. Employees"
 from      employees
 group by  company
-order by "No. Employees" desc
+order by "No. Employees" desc;
 
 
 -- ==============================================
@@ -76,7 +76,7 @@ having count(*) >= all (
                select count(*)
                from employees_data
                where company = 'Microsoft'
-               group by department)
+               group by department);
                
                
 
@@ -91,7 +91,7 @@ group by department
 having count(*) >= all (
                         select   count(*)
                         from     ms_employees
-                        group by department)
+                        group by department);
                
                
                
@@ -102,7 +102,7 @@ having count(*) >= all (
 select    company, department, count(*)
 from      employees
 group by  company, department
-order by  company, department
+order by  company, department;
 
 
 
@@ -118,7 +118,7 @@ having    count(*) >= all (
                            from      employees_data
                            where     company = e.company
                            group by  company, department)
-order by count(*) desc
+order by count(*) desc;
 
 
 
