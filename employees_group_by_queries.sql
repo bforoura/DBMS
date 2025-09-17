@@ -1,8 +1,29 @@
+GROUP BY and HAVING commands in SQL
+===================================
+	
+SELECT column1, column2, aggregate_function(column3)
+FROM table_name
+WHERE condition
+GROUP BY column1, column2;
 
--- Import the data file "employees_data.csv" first using the Table Data Import Wizard (right-click in Schemas Navigator)
+Grouping: The GROUP BY groups rows that have the same values in specified columns into summary rows, 
+	      like "total sales per department" or "average salary by department".
+	
+Aggregate Functions: The columns listed in the SELECT clause that are not part of the GROUP BY 
+	       must use aggregate functions (e.g., SUM(), COUNT(), MAX(), etc.).
+
+Order of Execution: GROUP BY comes after WHERE but before HAVING and ORDER BY.
 
 
 
+
+-- ==============================================================================================
+-- Query 0: Import the data file "employees_data.csv" first using the Table Data Import Wizard 
+--  (right-click in Schemas Navigator)
+-- ==============================================================================================
+
+
+	
 -- ===============================================
 -- Query 1: List the companies in alphabetic order
 -- ===============================================
