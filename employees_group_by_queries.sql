@@ -43,12 +43,13 @@ from     employees_data
 group by company
 order by count(*) desc;
 
--- alternatively,
+-- alternatively ,
 
-select    company, count(*) as "No. Employees"
-from      employees
+-- Note that backticks are used for identifier quoting (like column or table names).
+select    company, count(*) as `No. Employees`
+from      employees_data
 group by  company
-order by "No. Employees" desc;
+order by `No. Employees` desc;
 
 
 -- ==============================================
