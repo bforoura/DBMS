@@ -43,9 +43,8 @@ from     employees_data
 group by company
 order by count(*) desc;
 
--- alternatively ,
+-- alternatively, backticks (`) are the correct way to quote identifiers (including column aliases) in MySQL
 
--- Note that backticks are used for identifier quoting (like column or table names).
 select    company, count(*) as `No. Employees`
 from      employees_data
 group by  company
@@ -102,7 +101,9 @@ having count(*) >= all (
                
                
 
---  alternatively, we can create an alias called MS_employees using SQL's "with" clause:
+-- Alternatively, we can create an alias called ms_employees using SQL's "with" clause:
+-- The scope of the Common Table Expression (CTE), defined by WITH, is limited to the 
+--   immediate query that follows it. It does not extend to other queries or parts of the database.
 
 
 with ms_employees as (select * from employees_data where company='Microsoft')
