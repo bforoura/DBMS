@@ -43,12 +43,14 @@ from     employees_data
 group by company
 order by count(*) desc;
 
--- alternatively, backticks (`) are the correct way to quote identifiers (including column aliases) in MySQL
+-- alternatively, back quotes (`) are the correct way to  
+-- quote column aliases in MySQL
 
-select    company, count(*) as `No. Employees`
+select    company, count(*) as No_Employees
 from      employees_data
 group by  company
-order by `No. Employees` desc;
+order by  No_Employees desc;
+
 
 
 -- ==============================================
