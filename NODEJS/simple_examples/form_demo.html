@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submitter to Node.js Server</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        body { font-family: 'Inter', sans-serif; }
+        .form-container {
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.2s;
+        }
+        .form-container:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10 p-6 bg-white rounded-xl shadow-md">
+            <h1 class="text-4xl font-extrabold text-indigo-600">Form Controls Demo</h1>
+            <p class="mt-2 text-gray-700">Use these forms to send data to the running Node.js server on <code>http://localhost:3001</code>.</p>
+            <p class="text-sm text-red-500 font-medium mt-1">Make sure to run <code>node simple_echo_server.js</code> first!</p>
+        </header>
+
+        <div class="space-y-6">
+
+            <!-- Text Box -->
+            <div class="bg-white p-6 rounded-lg form-container">
+                <form action="http://localhost:3001/" method="GET" class="space-y-4">
+                    <label for="txbox" class="block text-lg font-semibold text-gray-800">1. Text Box:</label>
+                    <input type="text" id="txbox" name="txbox" value="Hello World" class="border border-gray-300 rounded-lg p-3 w-full focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-400" placeholder="Type text here...">
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                        Show Text Query String
+                    </button>
+                    <p class="text-sm text-gray-500 italic mt-2">Expected Query: <code>?txbox=Hello+World</code></p>
+                </form>
+            </div>
+
+            <!-- Check Boxes -->
+            <div class="bg-white p-6 rounded-lg form-container">
+                <form action="http://localhost:3001/" method="GET" class="space-y-4">
+                    <label class="block text-lg font-semibold text-gray-800">2. Check Boxes:</label>
+                    <div class="flex flex-wrap gap-6">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="fruit" value="Apple" checked class="rounded text-indigo-600 focus:ring-indigo-500">
+                            <span>Apple</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="fruit" value="Banana" class="rounded text-indigo-600 focus:ring-indigo-500">
+                            <span>Banana</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="fruit" value="Cherry" checked class="rounded text-indigo-600 focus:ring-indigo-500">
+                            <span>Cherry</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                        Show Checkbox Query String
+                    </button>
+                    <p class="text-sm text-gray-500 italic mt-2">Expected Query (if Apple and Cherry checked): <code>?fruit=Apple&fruit=Cherry</code></p>
+                </form>
+            </div>
+
+            <!-- Radio Buttons and Selection Box (Combined) -->
+            <div class="bg-white p-6 rounded-lg form-container grid md:grid-cols-2 gap-8">
+                <!-- Radio Buttons -->
+                <form action="http://localhost:3001/" method="GET" class="space-y-4">
+                    <label class="block text-lg font-semibold text-gray-800">3. Radio Buttons:</label>
+                    <div class="flex flex-col space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" name="color" value="Red" class="text-indigo-600 focus:ring-indigo-500" checked>
+                            <span>Red</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" name="color" value="Green" class="text-indigo-600 focus:ring-indigo-500">
+                            <span>Green</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                        Show Radio Query String
+                    </button>
+                    <p class="text-sm text-gray-500 italic mt-2">Expected Query: <code>?color=Red</code></p>
+                </form>
+
+                <!-- Selection Box -->
+                <form action="http://localhost:3001/" method="GET" class="space-y-4">
+                    <label for="selbox" class="block text-lg font-semibold text-gray-800">4. Selection Box:</label>
+                    <select id="selbox" name="selbox" class="border border-gray-300 rounded-lg p-3 w-full focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="OptionA">Option A</option>
+                        <option value="OptionB" selected>Option B</option>
+                        <option value="OptionC">Option C</option>
+                    </select>
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                        Show Select Query String
+                    </button>
+                    <p class="text-sm text-gray-500 italic mt-2">Expected Query: <code>?selbox=OptionB</code></p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
