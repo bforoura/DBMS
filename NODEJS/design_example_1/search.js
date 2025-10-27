@@ -5,6 +5,15 @@ const express = require("express");
 const app = express(); 
 const port = 3000;     
 
+//******************************************************************************
+//*** set up mysql connections - MODIFIED TO USE mysql2 AND A POOL
+// ******************************************************************************
+var mysql = require('mysql2');
+
+// Requires the exported pool object from the local 'mysql.js' file
+const pool = require('./mysql');
+
+
 //*** server waits indefinitely for incoming requests
 app.listen(port, function () {
     console.log("NodeJS app listening on port " + port);
@@ -15,31 +24,10 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//******************************************************************************
-//*** set up mysql connections - MODIFIED TO USE mysql2 AND A POOL
-// ******************************************************************************
-var mysql = require('mysql2');
-
-// Requires the exported pool object from the local 'mysql.js' file
-const pool = require('./mysql');
-
-
-// Check connection to the pool (using standard callback style)
-pool.getConnection((err, connection) => {
-    if (err) {
-        // Handle error: e.g., database down, incorrect credentials
-        console.error('Error connecting to MySQL Pool:', err.message);
-    } else {
-        console.log("Connected to MySQL Pool successfully!");
-        connection.release(); // Release the connection back to the pool
-    }
-});
-
 
 //******************************************************************************
 //*** File system module used for accessing files in nodejs (using promises API)
 //******************************************************************************
-
 const fsp = require("fs").promises; // Using fs/promises for async/await
 
 // Modified to be async and use await fsp.readFile
