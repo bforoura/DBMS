@@ -1,6 +1,6 @@
-//* **********************************************************************
-    Query 1. Find all users who have a profile location of "New York".
-********************************************************************** *//
+// **********************************************************************
+//    Query 1. Find all users who have a profile location of "New York".
+// ********************************************************************** 
 
 MDB Shell:				db.users.find({ "profile.location": "New York" })
 
@@ -265,4 +265,5 @@ db.users.aggregate([
     }
   }
 ])
+
 
