@@ -26,3 +26,189 @@ db.authors.insertMany([
     "country": "USA"
   }
 ]);
+
+
+
+
+
+Query 1
+=======
+SQL ==> SELECT * FROM authors;
+MDB ==> db.authors.find({});
+
+Query 2
+=======
+DELETE FROM authors;
+
+db.authors.deleteMany({});
+
+Query 3
+=======
+DROP TABLE authors;	
+db.authors.drop()
+
+Query 4
+=======
+DESC authors;
+db.authors.findOne();
+
+Query 5
+=======
+SELECT name 
+FROM authors;
+
+db.authors.find({}, {"name":1})
+db.authors.find({}, {"name":1, "_id":0})
+
+Query 6
+=======
+SELECT name, country 
+FROM authors;
+
+db.authors.find({}, {"name":1, "country":1, "_id":0})
+
+
+Query 7
+=======
+SELECT name, country 
+FROM authors
+ORDER BY country;
+
+db.authors.find({}, {"name":1, "country":1, "_id":0}).sort({"country":1})
+
+
+Query 8
+=======
+SELECT name, country 
+FROM authors
+ORDER BY country DESC
+LIMIT 1;
+
+db.authors.find({}, {"_id":0}).sort({"birth_year":-1}).limit(1)
+
+
+Query 9
+=======
+SELECT name, country 
+FROM authors
+WHERE birth_year < 1800;
+
+db.authors.find(
+    { "birth_year": { $lt: 1800 } },       // Filter: Authors born before 1800
+    { "name": 1, "country": 1, "_id": 0 }  // Projection: Show name and country, hide _id
+)
+
+
+Query 10
+========
+SELECT name, country 
+FROM authors
+WHERE birth_year >= 1900;
+
+db.authors.find(
+    { "birth_year": { $gte: 1900 } },      
+    { "name": 1, "country": 1, "_id": 0 }   
+)
+
+
+Query 11
+========
+SELECT name, country 
+FROM authors
+WHERE birth_year BETWEEN 1800 AND 1900;
+
+db.authors.find(
+    {"birth_year": {$gte: 1800, $lte: 1900} },    // AND implied
+    {"name": 1, "country": 1, "_id": 0 } 
+)
+
+
+Query 12
+========
+SELECT name, country 
+FROM authors
+WHERE birth_year < 1800 OR birth_year > 1900;
+
+db.authors.find(
+    { $or: [
+              { "birth_year": { $lt: 1800 } },  
+              { "birth_year": { $gt: 1900 } }   
+           ]
+    },
+    { "name": 1, "country": 1, "_id": 0 }  
+)
+
+
+
+
+Query 13
+========
+SELECT country, COUNT(*) 
+FROM authors GROUP BY country;
+
+db.authors.aggregate([
+  {
+    $group: {
+      _id: "$country",               // 1. GROUP BY: Group all documents by the value of the 'country' field
+      author_count: { $sum: 1 }      // 2. COUNT: Create a new field 'author_count' by summing 1 for every document in the group
+    }
+  }
+])
+
+
+
+Query 14
+========
+SELECT min(birth_year)
+FROM authors;
+
+
+db.authors.aggregate([
+  {
+    $group: {
+      _id: null,                                     // Group all documents together
+      earliest_year: { $min: "$birth_year" }         // Try max(), avg()
+    }
+  }
+])
+
+
+
+
+Query 15
+========
+
+SELECT country, COUNT(*) 
+FROM authors GROUP BY country
+order by count(*)
+limit 1;
+
+
+db.authors.aggregate([
+  // 1. GROUP and COUNT
+  {
+    $group: {
+      _id: "$country",               // Group by country
+      author_count: { $sum: 1 }      // Count authors in each group
+    }
+  },
+  
+  // 2. SORT to find the Minimum Count
+  {
+    $sort: { author_count: 1 }       // Sort counts ASCENDING (1)
+  },
+  
+  // 3. LIMIT to the Minimum Count
+  {
+    $limit: 1                        // Take only the top group (the one with the minimum count)
+  },
+  
+  // 4. PROJECT (Optional: Rename/Reformat)
+  {
+    $project: {
+      _id: 0,                        // Exclude the internal _id
+      country: "$_id",               // Rename the group key to 'country'
+      author_count: 1
+    }
+  }
+])
