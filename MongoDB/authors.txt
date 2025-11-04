@@ -1,0 +1,28 @@
+db.authors.insertMany([
+  {
+    "name": "Jane Austen",
+    "birth_year": 1775,
+    "country": "England"
+  },
+  {
+    "name": "Mark Twain",
+    "birth_year": 1835,
+    "country": "USA",
+    "pen_name_of": "Samuel Clemens"
+  },
+  {
+    "name": "Gabriel García Márquez",
+    "birth_year": 1927,
+    "country": "Colombia"
+  },
+  {
+    "name": "Virginia Woolf",
+    "birth_year": 1882,
+    "country": "England"
+  },
+  {
+    "name": "Toni Morrison",
+    "birth_year": 1931,
+    "country": "USA"
+  }
+]);
