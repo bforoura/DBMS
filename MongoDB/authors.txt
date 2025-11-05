@@ -48,8 +48,8 @@ db.authors.findOne();
 
 Query 4
 =======
-SELECT * FROM authors;
-db.authors.find({});
+SQL ==> SELECT * FROM authors;
+MQL ==> db.authors.find({});
 
 // The db.authors.aggregate() method takes an array of stages that process the documents sequentially.
 // The $match stage is used to filter documents based on specified criteria. It's essentially the aggregation 
@@ -119,6 +119,10 @@ FROM authors
 ORDER BY country;
 
 db.authors.find({}, {"name":1, "country":1, "_id":0}).sort({"country":1})
+
+// A pipeline in MongoDB refers to the Aggregation Pipeline, a framework to process documents and return computed results. 
+// It allows you to perform multi-stage data processing where documents are transformed from one stage to the next until 
+// a final result is produced
 
 db.authors.aggregate([
   {
@@ -375,3 +379,13 @@ db.authors.aggregate([
     }
   }
 ])
+
+
+
+====================================================================================================
+Resources: 
+    https://www.mongodb.com/docs/manual/tutorial/query-documents/
+    https://www.mongodb.com/docs/manual/aggregation/
+====================================================================================================
+
+
