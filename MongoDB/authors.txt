@@ -76,9 +76,25 @@ db.authors.aggregate([
 
 
 
-
-
 Query 5
+=======
+SQL ==> SELECT * 
+        FROM authors
+        WHERE country = 'USA';
+
+MQL ==> db.authors.find({"country": "USA"});
+
+db.authors.aggregate([
+  {
+    $match: {
+      country: "USA"
+    }
+  }
+]);
+
+
+
+Query 6
 =======
 SELECT name 
 FROM authors;
@@ -105,7 +121,7 @@ db.authors.aggregate([
 
 
 
-Query 6
+Query 7
 =======
 SELECT name, country 
 FROM authors;
@@ -124,7 +140,7 @@ db.authors.aggregate([
 
 
 
-Query 7
+Query 8
 =======
 SELECT name, country 
 FROM authors
@@ -151,7 +167,7 @@ db.authors.aggregate([
 
 
 
-Query 8
+Query 9
 =======
 SELECT name, country 
 FROM authors
@@ -179,8 +195,8 @@ db.authors.aggregate([
 
 
 
-Query 9
-=======
+Query 10
+========
 SELECT name, country 
 FROM authors
 WHERE birth_year < 1800;
@@ -210,7 +226,7 @@ db.authors.aggregate([
 
 
 
-Query 10
+Query 11
 ========
 SELECT name, country 
 FROM authors
@@ -242,7 +258,7 @@ db.authors.aggregate([
 
 
 
-Query 11
+Query 12
 ========
 SELECT name, country 
 FROM authors
@@ -271,7 +287,7 @@ db.authors.aggregate([
 
 
 
-Query 12
+Query 13
 ========
 SELECT name, country 
 FROM authors
@@ -308,7 +324,7 @@ db.authors.aggregate([
 
 
 
-Query 13
+Query 14
 ========
 SELECT country, COUNT(*) 
 FROM authors GROUP BY country;
@@ -324,7 +340,7 @@ db.authors.aggregate([
 
 
 
-Query 14
+Query 15
 ========
 SELECT min(birth_year)
 FROM authors;
@@ -342,7 +358,7 @@ db.authors.aggregate([
 
 
 
-Query 15
+Query 16
 ========
 
 SELECT country, COUNT(*) 
