@@ -55,6 +55,10 @@ MQL ==> db.authors.find({});
 // The $match stage is used to filter documents based on specified criteria. It's essentially the aggregation 
 // equivalent of the query document in a find() operation.
 
+// A pipeline in MongoDB refers to the Aggregation Pipeline, a framework to process documents and return computed results. 
+// It allows you to perform multi-stage data processing where documents are transformed from one stage to the next until 
+// a final result is produced
+
 // Why Use Aggregation?
 // For simply retrieving all documents, the find({}) method is much simpler and more efficient.
 // However, you would use the aggregate pipeline if you immediately needed to perform further processing on all the documents, such as:
@@ -81,6 +85,14 @@ FROM authors;
 
 db.authors.find({}, {"name":1})
 db.authors.find({}, {"name":1, "_id":0})
+
+// In the MongoDB Shell, you define the pipeline using the aggregate() command, passing an array of stages in JSON/BSON format
+// Alternatively, you can use Compass's Aggregations tab to build pipelines visually.
+// -- You add aggregation stages one by one (e.g., $match, $group).
+// -- You configure each stage using drop-down menus and input fields.
+// -- Compass provides a  preview of the documents at each stage of the pipeline, making it easy to see how your data is being transformed.
+// -- It also generates the equivalent code (in shell, Node.js, Python, etc.) once you have finished building the pipeline.
+
 
 db.authors.aggregate([
   {
@@ -120,9 +132,6 @@ ORDER BY country;
 
 db.authors.find({}, {"name":1, "country":1, "_id":0}).sort({"country":1})
 
-// A pipeline in MongoDB refers to the Aggregation Pipeline, a framework to process documents and return computed results. 
-// It allows you to perform multi-stage data processing where documents are transformed from one stage to the next until 
-// a final result is produced
 
 db.authors.aggregate([
   {
