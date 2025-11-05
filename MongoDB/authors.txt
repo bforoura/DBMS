@@ -27,30 +27,52 @@ db.authors.insertMany([
   }
 ]);
 
-
-
-
-
+===================================================================================================
 Query 1
 =======
-SQL ==> SELECT * FROM authors;
-MDB ==> db.authors.find({});
+SQL ==> DELETE FROM authors;
+MQL ==> db.authors.deleteMany({});
+
 
 Query 2
-=======
-DELETE FROM authors;
-
-db.authors.deleteMany({});
-
-Query 3
 =======
 DROP TABLE authors;	
 db.authors.drop()
 
-Query 4
+
+Query3
 =======
 DESC authors;
 db.authors.findOne();
+
+
+Query 4
+=======
+SELECT * FROM authors;
+db.authors.find({});
+
+// The db.authors.aggregate() method takes an array of stages that process the documents sequentially.
+// The $match stage is used to filter documents based on specified criteria. It's essentially the aggregation 
+// equivalent of the query document in a find() operation.
+
+// Why Use Aggregation?
+// For simply retrieving all documents, the find({}) method is much simpler and more efficient.
+// However, you would use the aggregate pipeline if you immediately needed to perform further processing on all the documents, such as:
+//          $group  (e.g., group authors by country).
+//          $project  (e.g., reshape the output fields).
+//          $sort  (e.g., sort all authors by birth year).
+//          $limit the results.
+
+
+db.authors.aggregate([
+  {
+    $match: {}
+  }
+]);
+
+
+
+
 
 Query 5
 =======
@@ -60,12 +82,34 @@ FROM authors;
 db.authors.find({}, {"name":1})
 db.authors.find({}, {"name":1, "_id":0})
 
+db.authors.aggregate([
+  {
+    $project: {
+      name: 1,
+      _id: 0
+    }
+  }
+]);
+
+
+
 Query 6
 =======
 SELECT name, country 
 FROM authors;
 
 db.authors.find({}, {"name":1, "country":1, "_id":0})
+
+db.authors.aggregate([
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  }
+]);
+
 
 
 Query 7
@@ -76,6 +120,23 @@ ORDER BY country;
 
 db.authors.find({}, {"name":1, "country":1, "_id":0}).sort({"country":1})
 
+db.authors.aggregate([
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  },
+  {
+    $sort: {
+      country: 1
+    }
+  }
+]);
+
+
+
 
 Query 8
 =======
@@ -85,6 +146,24 @@ ORDER BY country DESC
 LIMIT 1;
 
 db.authors.find({}, {"_id":0}).sort({"birth_year":-1}).limit(1)
+
+db.authors.aggregate([
+  {
+    $sort: {
+      birth_year: -1
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0
+    }
+  }
+]);
+
+
 
 
 Query 9
@@ -99,6 +178,25 @@ db.authors.find(
 )
 
 
+db.authors.aggregate([
+  {
+    $match: {
+      birth_year: { $lt: 1800 }
+    }
+  },
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  }
+]);
+
+
+
+
+
 Query 10
 ========
 SELECT name, country 
@@ -111,6 +209,26 @@ db.authors.find(
 )
 
 
+db.authors.aggregate([
+  {
+    $match: {
+      birth_year: { $gte: 1900 }
+    }
+  },
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  }
+]);
+
+
+
+
+
+
 Query 11
 ========
 SELECT name, country 
@@ -121,6 +239,23 @@ db.authors.find(
     {"birth_year": {$gte: 1800, $lte: 1900} },    // AND implied
     {"name": 1, "country": 1, "_id": 0 } 
 )
+
+db.authors.aggregate([
+  {
+    $match: {
+      birth_year: { $gte: 1800, $lte: 1900 }
+    }
+  },
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  }
+]);
+
+
 
 
 Query 12
@@ -137,6 +272,25 @@ db.authors.find(
     },
     { "name": 1, "country": 1, "_id": 0 }  
 )
+
+db.authors.aggregate([
+  {
+    $match: {
+      $or: [
+        { birth_year: { $lt: 1800 } }, // Authors born before 1800
+        { birth_year: { $gt: 1900 } }  // Authors born after 1900
+      ]
+    }
+  },
+  {
+    $project: {
+      name: 1,
+      country: 1,
+      _id: 0
+    }
+  }
+]);
+
 
 
 
@@ -182,6 +336,15 @@ SELECT country, COUNT(*)
 FROM authors GROUP BY country
 order by count(*)
 limit 1;
+
+
+// $limit BEFORE $project (Recommended for Efficiency)
+//  When your goal is to reduce the number of documents in the pipeline before applying the projection. 
+// This is the most common and most efficient sequence.
+
+// Applying $limit early ensures that the $project stage only has to process a small subset of documents, 
+// reducing the overall workload. The system doesn't waste resources transforming fields in documents that 
+// will ultimately be discarded by the limit.
 
 
 db.authors.aggregate([
