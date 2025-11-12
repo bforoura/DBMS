@@ -22,14 +22,20 @@ db.amazon.find({})
         FROM amazon;
 */
 
-db.amazon.find({}).count()   //deprecated
-
 db.amazon.countDocuments({})
 
-
-
-
+/* 
+   Note that we cannot type the above command in the Query Bar. Instead,
+   we can use the $count operator which is a built-in function in MongoDB's 
+   Aggregation Framework.
 /*
+
+   db.amazon.aggregate([
+       {"$count": "total_documents"}
+    ])
+
+	
+
    Query 3: Count of all manufacturers
    =======================================
 
@@ -55,6 +61,15 @@ db.amazon.countDocuments({})
 */
 
 db.amazon.find({}, { manufacturer: 1, _id: 0 })
+
+db.amazon.aggregate([
+  {
+    "$project": {
+      "manufacturer": 1,
+      "_id": 0
+    }
+  }
+])
 
 
 
@@ -242,4 +257,5 @@ db.amazon.aggregate([
 db.amazon.find(
   { product_name: { $regex: "christmas", $options: "i" } },  // Search for "christmas" in product_name, case-insensitive
   { product_name: 1, _id: 0 }  // Projection: only return product_name, exclude _id
+
 )
