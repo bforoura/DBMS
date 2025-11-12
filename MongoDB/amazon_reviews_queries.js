@@ -131,9 +131,39 @@ db.amazon.aggregate([
 ])
 
 
+/* 
+  Query 6: Groups all documents in the Amazon collection by their manufacturer and category/subcategory.
+  
+  TWO-WAY GROUPING
+  ================
+  In the $group stage, the _id field is used to specify the key by which documents should be grouped. 
+  To group by two or more fields, we can define the _id as an object containing references to those fields.
+
+
+  SQL:  SELECT manufacturer, amazon_category_and_sub_category AS category, COUNT(*) AS productCount, AVG(number_of_reviews) AS avgReviews
+        FROM amazon
+        GROUP BY manufacturer, amazon_category_and_sub_category
+*/
+
+db.amazon.aggregate([
+  {
+    $group: {
+      _id: {
+        manufacturer: "$manufacturer",
+        category: "$amazon_category_and_sub_category"
+      },
+      productCount: { $sum: 1 },
+      avgReviews: { $avg: "$number_of_reviews" }
+    }
+  }
+]);
+
+
+
+
 
 /*
-   Query 6: List of manufacturers and their product prices
+   Query 7: List of manufacturers and their product prices
    =======================================================
 
    SQL: SELECT manufacturer, price
@@ -146,7 +176,7 @@ db.amazon.find({}, { manufacturer: 1, price: 1, _id: 0 })
 
 
 /*
-   Query 7: Return a list of distinct manufacturers that have more than 10 reviews.
+   Query 8: Return a list of distinct manufacturers that have more than 10 reviews.
    ================================================================================
 
    $match: Filters documents where number_of_reviews is greater than 10.
@@ -172,7 +202,7 @@ db.amazon.aggregate([
 
 
 /*
-   Query 8: Return a list of distinct manufacturers that have between 10 and 20 reviews.
+   Query 9: Return a list of distinct manufacturers that have between 10 and 20 reviews.
    ====================================================================================
 
    	$match: Filters documents where number_of_reviews is greater than 10.
@@ -201,7 +231,7 @@ db.amazon.aggregate([
 
 
 /*
-   Query 9: Calculate the average no. of reviews for all manufacturers.
+   Query 10: Calculate the average no. of reviews for all manufacturers.
    =================================================================================================
 
 	id: null: This groups all documents together into one group, allowing us to calculate a global
@@ -236,7 +266,7 @@ db.amazon.aggregate([
 
 
 /*
-   Query 10: List all products containing the word 'christmas'
+   Query 11: List all products containing the word 'christmas'
    =================================================================================================
 
 	product_name: { $regex: "christmas", $options: "i" }: This part of the query uses the $regex operator
@@ -260,4 +290,5 @@ db.amazon.find(
   { product_name: 1, _id: 0 }  // Projection: only return product_name, exclude _id
 
 )
+
 
