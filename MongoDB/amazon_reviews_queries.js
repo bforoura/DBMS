@@ -84,6 +84,8 @@ db.amazon.aggregate([
    SQL: SELECT manufacturer
         FROM amazon
         GROUP BY manufacturer;
+
+   MQL: db.amazon.distinct("manufacturer")
 */
 
 db.amazon.aggregate([
@@ -93,7 +95,6 @@ db.amazon.aggregate([
     }
   }
 ])
-
 
 
 /*
@@ -110,12 +111,12 @@ db.amazon.aggregate([
 
 	SQL: SELECT COUNT(DISTINCT manufacturer) AS unique_manufacturer_count
 	     FROM amazon;
-
-	     or
-
+	     -- or -- 
 	     SELECT manufacturer, COUNT(*) AS manufacturer_count
 		 FROM amazon
-		GROUP BY manufacturer;
+	  	 GROUP BY manufacturer;
+		 
+	MQL: db.amazon.distinct("manufacturer").length
 */
 
 db.amazon.aggregate([
@@ -259,3 +260,4 @@ db.amazon.find(
   { product_name: 1, _id: 0 }  // Projection: only return product_name, exclude _id
 
 )
+
