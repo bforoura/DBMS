@@ -98,7 +98,7 @@ db.amazon.aggregate([
 
 
 /*
-   Query 5: List no. of all unique manufacturers
+   Query 5a: List no. of all unique manufacturers
    =============================================
 	$group: Groups the documents by the manufacturer field.
 	Each group represents a distinct manufacturer, and MongoDB
@@ -119,6 +119,35 @@ db.amazon.aggregate([
 	MQL: db.amazon.distinct("manufacturer").length
 */
 
+
+/* In the aggregate shown below, assume the original collection is like this:
+	_id		Manufacturer
+	====================
+	1		Hornby
+	2		Hornby
+	3		Bachmann
+	4		Peco
+	5		Bachmann
+
+After the $group stage:
+
+Input Documents		Output Documents (Unique List)
+==================================================
+"Hornby (1, 2)" 	{ "_id": "Hornby" }
+"Bachmann (3, 5)"	{ "_id": "Bachmann"}
+"Peco (4)"			{ "_id": "Peco"}
+
+
+After the $count stage:
+
+Input Documents		Output Document
+==================================================
+{"_id": "Hornby"}
+{"_id": "Bachmann"}			3
+{"_id": "Peco"}
+
+*/
+
 db.amazon.aggregate([
   {
     $group: {
@@ -131,6 +160,73 @@ db.amazon.aggregate([
 ])
 
 
+
+
+/* In the aggregate shown below, assume the original collection is like this:
+	_id		Manufacturer
+	====================
+	1		Hornby
+	2		Hornby
+	3		Bachmann
+	4		Peco
+	5		Bachmann
+
+After the 1st $group stage:
+
+Input Documents		Output Documents (Unique List)
+==================================================
+"Hornby (1, 2)" 	{ "_id": "Hornby" }
+"Bachmann (3, 5)"	{ "_id": "Bachmann"}
+"Peco (4)"			{ "_id": "Peco"}
+
+
+After the 2nd $group stage:
+
+Input Documents		Output Document
+==================================================
+_id					unique_manufacturer_count
+null				3
+
+*/
+
+
+db.amazon.aggregate([
+  {
+    $group: {
+      _id: "$manufacturer" // Create a document for each unique manufacturer
+    }
+  },
+  {
+    $group: {
+      _id: null, // When we set the _id field to null in a $group stage, MongoDB puts all documents in one group.
+      unique_manufacturer_count: { $sum: 1 } // Sums 1 for each document in the group
+    }
+  }
+])
+
+
+/* 
+   Note: Both queries in above produce the identical result, but Query 1 using the $count stage is the preferred, 
+   more efficient, less verbose.
+*/
+
+
+
+
+/* 
+   Query 5b: Find average price for each manufacturer 
+   
+   ===================================================
+*/
+
+db.amazon.aggregate([
+  {
+    $group: {
+      _id: "$manufacturer",
+      average_price: { $avg: "$price" }  
+    }
+  }
+])
 
 
 
@@ -262,6 +358,7 @@ db.amazon.find(
   { product_name: 1, _id: 0 }  // Projection: only return product_name, exclude _id
 
 )
+
 
 
 
