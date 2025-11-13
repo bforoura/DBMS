@@ -371,7 +371,6 @@ db.amazon.aggregate([
 ])
 
 
-
 /*
    Query 10: List all products containing the word 'christmas'
    =================================================================================================
@@ -446,6 +445,7 @@ Input Documents				Filtering Action
 So, 3 documents are passed to the $project stage, containing all their original fields.
 
 */
+
 
 
 
