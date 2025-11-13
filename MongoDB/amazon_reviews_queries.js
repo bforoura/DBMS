@@ -302,7 +302,7 @@ db.amazon.aggregate([
    Query 9: Calculate the average no. of reviews for all manufacturers.
    =================================================================================================
 
-	id: null: This groups all documents together into one group, allowing us to calculate a global
+	_id: null ==> This groups all documents together into one group, allowing us to calculate a global
 	average across the entire collection.
 
 	The average_reviews field will contain the calculated average of the number_of_reviews across all documents.
@@ -316,6 +316,32 @@ db.amazon.aggregate([
 */
 
 
+/* For example:
+
+Document ID (_id)	number_of_reviews
+======================================
+		1			15
+		2			null
+		3			10
+		4			25
+		5			null
+
+Document ID		number_of_reviews		value Passed to $avg
+============================================================
+		1			15							15
+		2			null						0
+		3			10							10
+		4			25							25
+		5			null						0
+
+
+Document ID			$avg
+=========================
+	null			50/5
+
+*/
+
+
 db.amazon.aggregate([
   {
     $project: {
@@ -325,11 +351,24 @@ db.amazon.aggregate([
   {
     $group: {
       _id: null,
+		
       average_reviews: { $avg: "$number_of_reviews" }
     }
   }
 ])
 
+/* or */
+
+db.amazon.aggregate([
+  {
+    $group: {
+      _id: null,
+		
+      // Apply $ifNull directly to the field *before* $avg calculates the average
+      average_reviews: { $avg: { $ifNull: ["$number_of_reviews", 0] } } 
+    }
+  }
+])
 
 
 
@@ -358,6 +397,28 @@ db.amazon.find(
   { product_name: 1, _id: 0 }  // Projection: only return product_name, exclude _id
 
 )
+
+/* or */
+
+db.amazon.aggregate([
+  {
+    // 1. $match: Filters documents based on the specified criteria
+    $match: {
+      product_name: { 
+        $regex: "christmas", 
+        $options: "i" // 'i' flag makes the search case-insensitive
+      }
+    }
+  },
+  {
+    // 2. $project: Reshapes each document, including only the specified fields
+    $project: {
+      product_name: 1, // Include the product_name field
+      _id: 0           // Exclude the default _id field
+    }
+  }
+])
+
 
 
 
