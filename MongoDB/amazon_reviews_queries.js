@@ -402,7 +402,7 @@ db.amazon.find(
 
 db.amazon.aggregate([
   {
-    // 1. $match: Filters documents based on the specified criteria
+    // $match: Filters documents based on the specified criteria
     $match: {
       product_name: { 
         $regex: "christmas", 
@@ -411,7 +411,7 @@ db.amazon.aggregate([
     }
   },
   {
-    // 2. $project: Reshapes each document, including only the specified fields
+    // $project: Reshapes each document, including only the specified fields
     $project: {
       product_name: 1, // Include the product_name field
       _id: 0           // Exclude the default _id field
@@ -423,6 +423,8 @@ db.amazon.aggregate([
 /*
  Example:
 
+ Data entering stage 1:
+
    Original _id		product_name					price (Other Fields)
    =========================================================
 	1				Hornby 2014 Catalogue			£3.42
@@ -432,19 +434,20 @@ db.amazon.aggregate([
 	5				Train Track cHrIStMaS Edition	£15.00
 
 
-After $match
+After $match:
 
 Input Documents				Filtering Action
 ============================================
-	1						EXCLUDED (No "christmas")
-	2						INCLUDED (Matches "Christmas Lights Set")
-	3						INCLUDED (Matches "Train Set, Christmas Special")
-	4						EXCLUDED (No ""christmas"")
-	5						INCLUDED (Matches "Train Track cHrIStMaS Edition")
+	1						 No "christmas"
+	2						 Matches "Christmas Lights Set"
+	3						 Matches "Train Set, Christmas Special"
+	4						 No "christmas"
+	5						 Matches "Train Track cHrIStMaS Edition"
 
-So, 3 documents are passed to the $project stage, containing all their original fields.
+So, 3 documents are passed to the $project stage with all their original fields.
 
 */
+
 
 
 
