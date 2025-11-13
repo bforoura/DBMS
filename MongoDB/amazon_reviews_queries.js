@@ -375,7 +375,6 @@ db.amazon.aggregate([
 /*
    Query 10: List all products containing the word 'christmas'
    =================================================================================================
-
 	product_name: { $regex: "christmas", $options: "i" }: This part of the query uses the $regex operator
 	to find documents where the product_name contains the word "christmas".
 
@@ -390,7 +389,8 @@ db.amazon.aggregate([
 
     ILIKE performs the same operation as LIKE, but it's case-insensitive
 
-*/
+*/  
+
 
 db.amazon.find(
   { product_name: { $regex: "christmas", $options: "i" } },  // Search for "christmas" in product_name, case-insensitive
@@ -398,7 +398,8 @@ db.amazon.find(
 
 )
 
-/* or */
+/* Alternate query:  */
+
 
 db.amazon.aggregate([
   {
@@ -418,6 +419,33 @@ db.amazon.aggregate([
     }
   }
 ])
+
+
+/*
+ Example:
+
+   Original _id		product_name					price (Other Fields)
+   =========================================================
+	1				Hornby 2014 Catalogue			£3.42
+	2				Christmas Lights Set			£12.99
+	3				Train Set, Christmas Special	£50.00
+	4				Toy Car Collection				£8.00
+	5				Train Track cHrIStMaS Edition	£15.00
+
+
+After $match
+
+Input Documents				Filtering Action
+============================================
+	1						EXCLUDED (No "christmas")
+	2						INCLUDED (Matches "Christmas Lights Set")
+	3						INCLUDED (Matches "Train Set, Christmas Special")
+	4						EXCLUDED (No ""christmas"")
+	5						INCLUDED (Matches "Train Track cHrIStMaS Edition")
+
+So, 3 documents are passed to the $project stage, containing all their original fields.
+
+*/
 
 
 
