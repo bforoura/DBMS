@@ -2,7 +2,7 @@
 //    Query 1. Find all users who have a profile location of "New York".
 // ********************************************************************** 
 
-MDB Shell:				db.users.find({ "profile.location": "New York" })
+MQL:					db.users.find({ "profile.location": "New York" })
 
 Compass Query Bar: 		{ "profile.location": "New York" }
 
@@ -13,17 +13,17 @@ Compass Query Bar: 		{ "profile.location": "New York" }
     Query 2. Find average age of all users.
 ********************************************************************** */
 
-[
+db.users.aggregate([
   {
-    $group:
-      {
-        _id: null,
-        averageAge: {
-          $avg: "$age"
-        }
+    $group: {
+      _id: null, // Group all documents together
+
+      averageAge: {
+        $avg: "$age" // Calculate the average of the 'age' field
       }
+    }
   }
-]
+])
 
 
 
@@ -33,61 +33,49 @@ Compass Query Bar: 		{ "profile.location": "New York" }
     Query 3. Find all the posts made by "bob". (use the username or _id)
 ********************************************************************** */
 
-MDB Shell: 	db.users.find({ username: "bob" }, { posts: 1 })
+MQL: 		db.users.find({ username: "bob" }, { posts: 1 })
 			db.users.find({ _id: "507f191e810c19729de860eb" }, { posts: 1 })
 
-Compass: Pipeline
 
-[
+db.users.aggregate([
   {
-    $match:
-      {
-        username: "bob"
-      }
+    // Stage 1: Filter to find the user 'bob'
+    $match: {
+      username: "bob"
+    }
   },
   {
-    $project:
-      {
-        posts: 1
-      }
+    // Stage 2: Project (select) only the 'posts' field
+    $project: {
+      posts: 1
+      // Note: _id is included by default unless explicitly excluded with _id: 0
+    }
   }
-]
+])
+
+
 
 
 
 /* **********************************************************************
     Query 4. Repeat Q3 but rename "posts" as "bobposts"
 ********************************************************************** */
-[
-  {
-    $match:
 
-      {
-        username: "bob"
-      }
+db.users.aggregate([
+  {
+    $match: {
+      username: "bob"
+    }
   },
   {
-    $project:
-      /**
-       * specifications: The fields to
-       *   include or exclude.
-       */
-      {
-        bobposts: "$posts"
+    $project: {
+      bobposts: { // Rename the field and project nested fields in one go
+        content: "$posts.content",
+        createdAt: "$posts.createdAt"
       }
-  },
-  {
-    $project:
-      /**
-       * specifications: The fields to
-       *   include or exclude.
-       */
-      {
-        "bobposts.content": 1,
-        "bobposts.createdAt": 1
-      }
+    }
   }
-]
+])
 
 
 
@@ -96,40 +84,46 @@ Compass: Pipeline
 /* **********************************************************************
     Query 5. Find names and email addresses of those who follow "alice".
 ********************************************************************** */
-[
+db.users.aggregate([
   {
-    $match:
-
-      {
-        followers: "507f191e810c19729de860ea"  // Alice's objectID
-      }
+    $match: {
+      followers: "507f191e810c19729de860ea"
+    }
   },
   {
-    $project:
-      {
-        username: 1,
-        email: 1,
-        _id: 0
-      }
+    $project: {
+      username: 1,
+      email: 1,
+      _id: 0
+    }
   }
-]
+])
 
 
 
 /* **********************************************************************
     Query 6. Count number of followers for each user.
 ********************************************************************** */
-[
+db.users.aggregate([
+  // Stage 1: Calculate the follower count for each user
   {
-    $project:
-      {
-        username: 1,
-        followerCount: {
-          $size: "$followers"
-        }
+    $project: {
+      _id: 0,
+      followerCount: {
+        $size: "$followers"
       }
+    }
+  },
+  // Stage 2: Group all documents and calculate the average
+  {
+    $group: {
+      _id: null, // Group all documents into one
+      averageFollowerCount: {
+        $avg: "$followerCount" // Calculate the average of the newly created field
+      }
+    }
   }
-]
+])
 
 
 
@@ -137,81 +131,74 @@ Compass: Pipeline
     Query 7. Find the user with the most followers.
 ********************************************************************** */
 
-[
+db.users.aggregate([
   {
-    $project:
-      {
-        username: 1,
-        _id: 0,
-        followerCount: {
-          $size: "$followers"
-        }
+    // Stage 1: Calculate the size of the 'following' array
+    $project: {
+      username: 1,
+      _id: 0,
+      followingCount: {
+        $size: "$following"
       }
+    }
   },
   {
-    $sort:
-      {
-        followerCount: -1
-      }
+    // Stage 2: Sort by the count in descending order (-1)
+    $sort: {
+      followingCount: -1
+    }
   },
   {
-    $limit:
-      1
+    // Stage 3: Limit the results to the top 3
+    $limit: 3
   }
-]
+])
+
 
 
 
 /* **********************************************************************
     Query 8. Display the last post for every user.
 ********************************************************************** */
-
-[
+db.users.aggregate([
   {
-    $project:
-      {
-        username: 1,
-        lastPost: {
-          $arrayElemAt: ["$posts", -1]
-        }
+    $project: {
+      username: 1,
+      lastPost: {
+        $arrayElemAt: ["$posts", -1]
       }
+    }
   },
   {
-    $project:
-      {
-        username: 1,
-        _id: 0,
-        postContent: "$lastPost.content",
-        postDate: "$lastPost.createdAt"
-      }
+    $project: {
+      username: 1,
+      _id: 0,
+      postContent: "$lastPost.content",
+      postDate: "$lastPost.createdAt"
+    }
   }
-]
+])
 
 
 
 /* **********************************************************************
     Query 9. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
 ********************************************************************** */
-[
+db.users.aggregate([
   {
-    $match:
-
-      {
-        "profile.bio": { $regex: "travel", $options: "i"}
-      }
+    $match: {
+      "profile.bio": { $regex: "travel", $options: "i"}
+    }
   },
   {
-    $project:
-
-      {
-        username: 1,
-        _id: 0,
-        email: 1,
-        profileBio: "$profile.bio"
-      }
+    $project: {
+      username: 1,
+      _id: 0,
+      email: 1,
+      profileBio: "$profile.bio"
+    }
   }
-]
-
+])
 
 
 /* **********************************************************************
@@ -265,5 +252,6 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
