@@ -114,7 +114,7 @@ db.users.aggregate([
 	the three matched users' details into the single followedUserDetails array. This is often described 
 	as denormalization on the fly.
 ********************************************************************** */
-db.getCollection('users').aggregate(
+db.users.aggregate(
   [
     {
       $match: { _id: '507f191e810c19729de860ea' }
@@ -135,9 +135,8 @@ db.getCollection('users').aggregate(
         email: '$followedUserDetails.email'
       }
     }
-  ],
-  { maxTimeMS: 60000, allowDiskUse: true }
-);
+  ]
+)
 
 
 
@@ -292,6 +291,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
