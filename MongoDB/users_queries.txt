@@ -100,9 +100,49 @@ db.users.aggregate([
 ])
 
 
+/* **********************************************************************
+    Query 6. Who does alice follow?
+
+	$lookup stage is comparable to a LEFT OUTER JOIN in SQL.
+	It's used to combine documents (rows) from the current collection with related documents (rows) 
+	from another table or, in this case, the same collection.
+
+	In SQL, a JOIN produces new rows for every match. If Alice follows three people, the SQL join 
+	would produce three rows, each containing Alice's details plus one of the followed users' details.
+
+	In MongoDB, the $lookup is array-oriented: it keeps Alice's document as a single document and embeds 
+	the three matched users' details into the single followedUserDetails array. This is often described 
+	as denormalization on the fly.
+********************************************************************** */
+db.getCollection('users').aggregate(
+  [
+    {
+      $match: { _id: '507f191e810c19729de860ea' }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'following',
+        foreignField: '_id',
+        as: 'followedUserDetails'
+      }
+    },
+    { $unwind: '$followedUserDetails' },
+    {
+      $project: {
+        _id: 0,
+        username: '$followedUserDetails.username',
+        email: '$followedUserDetails.email'
+      }
+    }
+  ],
+  { maxTimeMS: 60000, allowDiskUse: true }
+);
+
+
 
 /* **********************************************************************
-    Query 6. Count number of followers for each user.
+    Query 7. Count number of followers for each user.
 ********************************************************************** */
 db.users.aggregate([
   // Stage 1: Calculate the follower count for each user
@@ -128,7 +168,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 7. Find the user with the most followers.
+    Query 8. Find the user with the most followers.
 ********************************************************************** */
 
 db.users.aggregate([
@@ -158,7 +198,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 8. Display the last post for every user.
+    Query 9. Display the last post for every user.
 ********************************************************************** */
 db.users.aggregate([
   {
@@ -182,7 +222,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 9. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
+    Query 10. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
 ********************************************************************** */
 db.users.aggregate([
   {
@@ -202,7 +242,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 10. Find users who have at least 2 followers and are following
+    Query 11. Find users who have at least 2 followers and are following
               at least 2 people. Then, sort these users by the number of
               followers they have.
 
@@ -252,6 +292,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
