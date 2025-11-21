@@ -90,10 +90,11 @@ db.users.aggregate(
 /* **********************************************************************
     Query 5. Who does alice follow?
 
-	(1) If we only want the IDs of those who follow Alice, we can simply use $match and $project.
+	(1) If we only want the IDs of those who follow Alice, we can simply use $match and $project:
 		db.users.find({username: 'alice'},{followers: 1, _id: 0});
 
-	(2) If we want the follower's details (like their username, age, or profile), rather than just their ID, we would then need to use $lookup
+	(2) If we want the follower's details (like their username, age, or profile), rather than just their IDs,
+        we would then need to use $lookup
 
 	$lookup stage is comparable to a LEFT OUTER JOIN in SQL.
 	It's used to combine documents (rows) from the current collection with related documents (rows) 
@@ -283,6 +284,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
