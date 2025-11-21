@@ -60,14 +60,14 @@ db.users.aggregate([
 /* **********************************************************************
     Query 4. Retrieve the content of all posts made by Bob
 
-$unwind: 
-    -- Deconstructs the posts array field, creating a new document for each element in the array. 
-    -- If the posts field contains 5 elements, this stage will output 5 documents, each containing one of Bob's posts
+	$unwind: 
+   		 -- Deconstructs the posts array field, creating a new document for each element in the array. 
+   		 -- If the posts field contains 5 elements, this stage will output 5 documents, each containing one of Bob's posts
 
-$replaceRoot:
-	-- Replaces the entire input document with the value of the posts field. 
-	-- Since $unwind has already run, the posts field now holds a single post object (the individual element from the array). 
-	-- This basically promotes the post object to become the new root document.
+	$replaceRoot:
+		-- Replaces the entire input document with the value of the posts field. 
+		-- Since $unwind has already run, the posts field now holds a single post object (the individual element from the array). 
+		-- This basically promotes the post object to become the new root document.
 
 ********************************************************************** */
 
@@ -276,6 +276,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
