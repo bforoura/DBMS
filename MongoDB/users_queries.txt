@@ -58,50 +58,35 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 4. Repeat Q3 but rename "posts" as "bobposts"
+    Query 4. Retrieve the content of all posts made by Bob
+
+$unwind: 
+    -- Deconstructs the posts array field, creating a new document for each element in the array. 
+    -- If the posts field contains 5 elements, this stage will output 5 documents, each containing one of Bob's posts
+
+$replaceRoot:
+	-- Replaces the entire input document with the value of the posts field. 
+	-- Since $unwind has already run, the posts field now holds a single post object (the individual element from the array). 
+	-- This basically promotes the post object to become the new root document.
+
 ********************************************************************** */
 
-db.users.aggregate([
-  {
-    $match: {
-      username: "bob"
-    }
-  },
-  {
-    $project: {
-      bobposts: { // Rename the field and project nested fields in one go
-        content: "$posts.content",
-        createdAt: "$posts.createdAt"
-      }
-    }
-  }
-])
+db.users.aggregate(
+  [
+    { $match: { username: 'bob' } },
 
+    { $unwind: { path: '$posts' } },
 
+    { $replaceRoot: { newRoot: '$posts' } },
+
+    { $project: { content: 1 } }
+  ]
+);
 
 
 
 /* **********************************************************************
-    Query 5. Find names and email addresses of those who follow "alice".
-********************************************************************** */
-db.users.aggregate([
-  {
-    $match: {
-      followers: "507f191e810c19729de860ea"
-    }
-  },
-  {
-    $project: {
-      username: 1,
-      email: 1,
-      _id: 0
-    }
-  }
-])
-
-
-/* **********************************************************************
-    Query 6. Who does alice follow?
+    Query 5. Who does alice follow?
 
 	$lookup stage is comparable to a LEFT OUTER JOIN in SQL.
 	It's used to combine documents (rows) from the current collection with related documents (rows) 
@@ -141,7 +126,7 @@ db.users.aggregate(
 
 
 /* **********************************************************************
-    Query 7. Count number of followers for each user.
+    Query 6. Count number of followers for each user.
 ********************************************************************** */
 db.users.aggregate([
   // Stage 1: Calculate the follower count for each user
@@ -167,7 +152,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 8. Find the user with the most followers.
+    Query 7. Find the user with the most followers.
 ********************************************************************** */
 
 db.users.aggregate([
@@ -197,7 +182,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 9. Display the last post for every user.
+    Query 8. Display the last post for every user.
 ********************************************************************** */
 db.users.aggregate([
   {
@@ -221,7 +206,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 10. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
+    Query 9. Find users who are Travel enthusiasts (e.g., "Travel" in Bio)
 ********************************************************************** */
 db.users.aggregate([
   {
@@ -241,7 +226,7 @@ db.users.aggregate([
 
 
 /* **********************************************************************
-    Query 11. Find users who have at least 2 followers and are following
+    Query 10. Find users who have at least 2 followers and are following
               at least 2 people. Then, sort these users by the number of
               followers they have.
 
@@ -291,6 +276,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
