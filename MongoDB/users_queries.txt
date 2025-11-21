@@ -69,6 +69,8 @@ db.users.aggregate([
 		-- Since $unwind has already run, the posts field now holds a single post object (the individual element from the array). 
 		-- This basically promotes the post object to become the new root document.
 
+	Question: Can $replaceRoot be removed from the pipeline?
+
 ********************************************************************** */
 
 db.users.aggregate(
@@ -276,6 +278,7 @@ db.users.aggregate([
     }
   }
 ])
+
 
 
 
