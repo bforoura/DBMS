@@ -1,0 +1,108 @@
+/* ==================================================================================================
+   Query 1: Who does alice follow?
+================================================================================================== */
+
+
+db.social_links.aggregate(
+  [
+    // 1. Match the links where 'follower_id' is Alice's ID
+    {
+      $match: {
+        follower_id: '507f191e810c19729de860ea'
+      }
+    },
+
+    // 2. Join the 'following_id' to the 'users' collection
+    //    This retrieves the details of the people Alice is following.
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'following_id',
+        foreignField: '_id',
+        as: 'followedUserDetails' // Resulting array of 1 document
+      }
+    },
+
+    // 3. Deconstruct the followedUserDetails array
+    {
+      $unwind: '$followedUserDetails'
+    },
+
+    // 4. Project the final desired fields
+    {
+      $project: {
+        _id: 0,
+        username: '$followedUserDetails.username',
+        email: '$followedUserDetails.email'
+      }
+    }
+  ]
+)
+
+
+
+/* ==================================================================================================
+   Query 2: Find posts of those who alice follows.
+
+================================================================================================== */
+
+// Start the pipeline on the links collection
+db.links.aggregate([
+
+  // 1. MATCH: Filter for Alice's followings
+  {
+    $match: {
+      follower_id: '507f191e810c19729de860ea' // Alice's ID
+    }
+  },
+
+
+  // 2. $LOOKUP (Join 1: links -> posts)
+  // Get the actual posts made by the people Alice is following.
+  {
+    $lookup: {
+      from: 'posts',
+      localField: 'following_id', // ID of the user Alice follows (the 'poster')
+      foreignField: 'user_id',    // Matching the user_id in the posts collection
+      as: 'followedUserPosts'
+    }
+  },
+
+
+  // 3. $UNWIND: Deconstruct the posts array so each post is a separate document
+  {
+    $unwind: '$followedUserPosts'
+  },
+
+
+
+  // 4. $LOOKUP (Join 2: posts -> users)
+  // Get the username of the person who created the post.
+  {
+    $lookup: {
+      from: 'users',
+      localField: 'followedUserPosts.user_id', // The ID of the post author
+      foreignField: '_id',                    // Matching the user ID in the users collection
+      as: 'posterDetails'
+    }
+  },
+
+
+
+  // 5. $UNWIND: Deconstruct the posterDetails array (each post has only one author)
+  {
+    $unwind: '$posterDetails'
+  },
+
+
+
+  // 6. $PROJECT: Shape the final output
+  {
+    $project: {
+      _id: 0,
+      username: '$posterDetails.username',
+      postContent: '$followedUserPosts.content',
+      postedAt: '$followedUserPosts.createdAt'
+    }
+  }
+])

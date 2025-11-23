@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "507f191e810c19729de860ea",
+    "username": "alice",
+    "email": "alice@example.com",
+    "profile": {
+      "bio": "Travel enthusiast.",
+      "location": "New York"
+    },
+    "age": 28
+  },
+  {
+    "_id": "507f191e810c19729de860eb",
+    "username": "bob",
+    "email": "bob@example.com",
+    "profile": {
+      "bio": "Food lover.",
+      "location": "Los Angeles"
+    },
+    "age": 34
+  },
+  {
+    "_id": "507f191e810c19729de860ec",
+    "username": "charlie",
+    "email": "charlie@example.com",
+    "profile": {
+      "bio": "Tech geek.",
+      "location": "San Francisco"
+    },
+    "age": 29
+  },
+  {
+    "_id": "507f191e810c19729de860ed",
+    "username": "dave",
+    "email": "dave@example.com",
+    "profile": {
+      "bio": "Outdoor adventures.",
+      "location": "Denver"
+    },
+    "age": 40
+  },
+  {
+    "_id": "507f191e810c19729de860ee",
+    "username": "eve",
+    "email": "eve@example.com",
+    "profile": {
+      "bio": "Art lover.",
+      "location": "Chicago"
+    },
+    "age": 26
+  },
+  {
+    "_id": "507f191e810c19729de860ef",
+    "username": "frank",
+    "email": "frank@example.com",
+    "profile": {
+      "bio": "Movie buff.",
+      "location": "Seattle"
+    },
+    "age": 31
+  },
+  {
+    "_id": "507f191e810c19729de860f0",
+    "username": "grace",
+    "email": "grace@example.com",
+    "profile": {
+      "bio": "Fitness junkie.",
+      "location": "Miami"
+    },
+    "age": 22
+  },
+  {
+    "_id": "507f191e810c19729de860f1",
+    "username": "hank",
+    "email": "hank@example.com",
+    "profile": {
+      "bio": "Guitar player.",
+      "location": "Austin"
+    },
+    "age": 35
+  }
+]
