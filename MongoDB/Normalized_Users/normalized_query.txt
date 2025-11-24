@@ -3,7 +3,7 @@
 ================================================================================================== */
 
 
-db.social_links.aggregate(
+db.links.aggregate(
   [
     // 1. Match the links where 'follower_id' is Alice's ID
     {
@@ -106,3 +106,4 @@ db.links.aggregate([
     }
   }
 ])
+
