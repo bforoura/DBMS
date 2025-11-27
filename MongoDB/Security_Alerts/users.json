@@ -1,0 +1,8 @@
+[
+  { "_id": 701, "username": "Emma", "department": "Engineering", "is_active": true },
+  { "_id": 702, "username": "Michael", "department": "Marketing", "is_active": true },
+  { "_id": 703, "username": "Eve", "department": "Accounting", "is_active": false },
+  { "_id": 704, "username": "Paul", "department": "Finance", "is_active": true },
+  { "_id": 705, "username": "Jackie", "department": "HR", "is_active": false },
+  { "_id": 706, "username": "Olivia", "department": "Operations", "is_active": true }
+]
