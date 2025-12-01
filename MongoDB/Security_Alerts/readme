@@ -1,7 +1,7 @@
-Alerts from an organization’s Security Operations Center (SOC) provide critical information 
+Alerts from an organization’s Security Operations Center provide critical information 
 concerning potential security threats and incidents to an organization.
     
-By receiving alerts from the SOC, an organization can quickly identify incidents and take 
+By receiving these alerts, an organization can quickly identify incidents and take 
 appropriate action to respond to and mitigate the threat. 
   
 Assume we are working with three relations:
