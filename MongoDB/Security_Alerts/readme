@@ -7,4 +7,4 @@ appropriate action to respond to and mitigate the threat.
 Assume we are working with three relations:
 -- alerts (the primary table): Contains operational data about actual events detected by the system.
 -- users: Holds info. about the people in the organization that are generating the alerts.
---npolicies: Defines the organizational rules that were violated by the users.
+-- policies: Defines the organizational rules that were violated by the users.
