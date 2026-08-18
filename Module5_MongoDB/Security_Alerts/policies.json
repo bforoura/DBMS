@@ -1,0 +1,8 @@
+[
+  { "_id": "POL-101", "name": "Admin Login Policy", "rule": "Restrict after-hours admin logins." },
+  { "_id": "POL-202", "name": "Data Exfiltration Policy", "rule": "Block large file transfers to external domains." },
+  { "_id": "POL-303", "name": "Endpoint Security Policy", "rule": "Flag unauthorized software execution." },
+  { "_id": "POL-404", "name": "Geo-Location Policy", "rule": "Alert on logins from restricted countries." },
+  { "_id": "POL-505", "name": "Privilege Escalation Policy", "rule": "Monitor failed attempts to gain root access." },
+  { "_id": "POL-606", "name": "Phishing Policy", "rule": "Block emails with suspicious links." }
+]

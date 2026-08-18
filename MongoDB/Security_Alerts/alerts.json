@@ -1,9 +1,0 @@
-[
-  { "_id": "T-111", "type": "Admin Login", "user_id": 701, "policy_id": "POL-101" },
-  { "_id": "T-112", "type": "Large Transfer", "user_id": 702, "policy_id": "POL-202" },
-  { "_id": "T-113", "type": "Unauthorized Executable", "user_id": 703, "policy_id": "POL-303" },
-  { "_id": "T-114", "type": "Geo-Violation", "user_id": 704, "policy_id": "POL-404" },
-  { "_id": "T-115", "type": "PrivEsc Failure", "user_id": 704, "policy_id": "POL-505" },
-  { "_id": "T-116", "type": "Admin Login (Failed)", "user_id": 705, "policy_id": "POL-101" },
-  { "_id": "T-117", "type": "Geo-Violation", "user_id": 701, "policy_id": "POL-404" }
-]
