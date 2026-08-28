@@ -6,13 +6,6 @@ mission can include multiple astronauts. For every astronaut who participates in
 performs on that mission, such as Commander, Pilot, Engineer, Scientist, etc.
 
 
-
-
-
-
-
-
-
   
 Astronaut Table:                       Participates_In Table:               Mission Table:
 =================================      ================================     ===============================
@@ -27,34 +20,12 @@ A104 | Leonid Kadenyuk | Ukrainian     A101 | M502 | Engineer               M504
 
 
 
-
-
-
-
-
-
-
-
-
-
 Problem 2
 =========
 In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical 
 tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals 
 also keep logs of the treatments administered to patients, which include details about the doctors providing the treatments, the type of 
 treatment, and the dates on which these treatments are given.
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Doctor Table:                        Treatment Table:                      Hospital Table:  
@@ -116,6 +87,23 @@ Be sure to define the appropriate entities, their attributes, and the relationsh
 
 
 
+
+Student Table:                       Team Table: 
+==============================       ===================
+Student_ID | Name | Email            Team_ID | Leader_ID  
+==============================       ====================
+S01 | Alice Lee | alee@univ.edu      T1 | S01              
+S02 | Bob Chen | bchen@univ.edu      T2 | S03             
+S03 | Carol Wu | cwu@univ.edu                              
+
+
+Experiment Table:                    	Participates_In Table:
+================================      =======================
+ Exp_ID | Name | Date                	Team_ID | Exp_ID | Score
+=================================     =======================
+ Exp#1 | Sorting Algo | 2026-03-01  	  T1 | Exp#1 | 95
+ Exp#2 | Graph Search | 2026-03-15  	  T2 | Exp#1 | 88
+ Exp#1 | Sorting Algo | 2026-03-01  	  T1 | Exp#2 | 92
 
 
 
