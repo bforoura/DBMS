@@ -57,6 +57,37 @@ treatment, and the dates on which these treatments are given.
 
 
 
+Doctor Table:                        Treatment Table:                      Hospital Table:  
+============================         =============================        =============================
+Doctor_ID | Name | Specialty         Doctor_ID | Patient_ID | Type        Hospital_ID | Name | Location   
+============================         =============================        =============================
+D01 | Dr. House | Diagnostics        D01 | P01 | Chemotherapy             H101 | Mercy Gen | Boston     
+D02 | Dr. Grey | Surgery             D02 | P02 | Appendectomy             H102 | St. Jude | Philadelphia
+D03 | Dr. Strange | Neurosurgery     D03 | P03 | Spinal Tap               H103 | Metro Health | Chicago 
+
+
+
+ Patient Table:                        Test Table:
+ =======================               ==================================================
+ Patient_ID | Name | DOB               Test_ID | Hospital_ID | Patient_ID | Type | Result
+ =======================               ==================================================
+ P01 | John Doe | 1985-04-12           T901 | H101 | P01 | MRI Brain | Normal
+ P02 | Jane Smith | 1990-09-22         T902 | H102 | P02 | Blood Panel | Elevated
+ P03 | Robert Lee | 1978-12-05         T903 | H103 | P03 | X-Ray Chest | Clear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
