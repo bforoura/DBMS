@@ -13,6 +13,22 @@ performs on that mission, such as Commander, Pilot, Engineer, or Scientist.
 
 
 
+  
+Astronaut Table:                       Participates_In Table:               Mission Table:
+=================================      ================================     ===============================
+Astronaut_ID | Name | Nationality      Astronaut_ID | Mission_ID | Role     Mission_ID | Name | Destination
+=================================      ================================     ===============================
+A101 | Elena Vance | American          A101 | M501 | Commander              M501 | Artemis V | Moon
+A102 | Kenji Sato | Japanese           A102 | M501 | Pilot                  M502 | Ares Prime | Mars
+A103 | Amara Okafor | Nigerian         A103 | M502 | Scientist              M503 | Titan Horizon | Saturn (Titan)
+A104 | Leonid Kadenyuk | Ukrainian     A101 | M502 | Engineer               M504 | STS-87 | Earth Orbit
+                                       A104 | M504 | Payload Specialist
+
+
+
+
+
+
 
 
 
