@@ -34,11 +34,12 @@ A space agency wants to keep track of astronauts, the missions they participate 
 -- Each mission has a unique mission number, a name, and a destination.
 -- The agency maintains a fleet of vehicles. Each spacecraft has a unique spacecraft ID, a model name, and a crew capacity.
 
-An astronaut can participate in multiple missions, and a mission can include multiple astronauts. For every astronaut who participates in a mission, the agency records the role that 
-the astronaut performs on that mission (such as Commander, Pilot, Engineer, or Scientist).
+An astronaut can participate in multiple missions, and a mission can include multiple astronauts. For every astronaut who participates 
+in a mission, the agency records the role that the astronaut performs on that mission (such as Commander, Pilot, Engineer, or Scientist).
 
-To execute a mission, a vehicle is required. Therefore, every mission must be assigned to exactly one spacecraft (total participation). However, a spacecraft can exist in the agency's 
-fleet without ever being assigned to a mission (partial participation), such as when a vehicle is newly built or grounded for maintenance.
+To execute a mission, a vehicle is required. Therefore, every mission must be assigned to exactly one spacecraft (total participation). 
+However, a spacecraft can exist in the agency's fleet without ever being assigned to a mission (partial participation), such as when a vehicle 
+is newly built or grounded for maintenance.
 
 
 
