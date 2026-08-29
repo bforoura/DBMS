@@ -6,12 +6,6 @@ mission can include multiple astronauts. For every astronaut who participates in
 performs on that mission, such as Commander, Pilot, Engineer, Scientist, etc.
 
 
-
-
-
-
-
-
   
 Astronaut Table:                       Participates_In Table:               Mission Table:
 =================================      ================================     ===============================
@@ -55,10 +49,28 @@ M504       | S204                            S204          | SLS        | 4
 
 
 
-
-
-
 Problem 3
+=========
+Reconsider Problem 2. The agency now wants to keep track of supervisory relationships between astronauts. An astronaut can supervise 
+other astronauts, while an astronaut may have at most one direct supervisor. This creates a recursive relationship called SUPERVISES 
+on the ASTRONAUT entity. For example, a senior astronaut may supervise one or more junior astronauts.
+
+Supervises
+========================
+Supervisor_ID | Supervisee_ID
+========================
+A101          | A102                                     A101 (Elena Vance) supervises A102 and A103.
+A101          | A103
+A104          | A102                                     A104 (Leonid Kadenyuk) supervises A102
+
+
+Add "Supervises" to your ER diagram from Problem 2 without needing any another entity sets.
+
+
+
+
+
+Problem 4
 =========
 In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical 
 tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals 
@@ -89,7 +101,7 @@ D03 | Dr. Strange | Neurosurgery     D03 | P03 | Spinal Tap               H103 |
 
 
 
-Problem 4
+Problem 5
 =========
 In a programming class, students are organized into teams to conduct various software experiments. Each team is led by one of the students, 
 who acts as the team leader. The class requires a system to track the details of each experiment conducted by the teams and to record the 
