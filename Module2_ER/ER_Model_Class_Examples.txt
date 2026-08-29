@@ -27,6 +27,37 @@ A104 | Leonid Kadenyuk | Ukrainian     A101 | M502 | Engineer               M504
 
 
 Problem 2
+==========
+
+A space agency wants to keep track of astronauts, the missions they participate in, and the spacecraft used for these missions.
+-- Each astronaut has a unique ID, a name, and a nationality.
+-- Each mission has a unique mission number, a name, and a destination.
+-- The agency maintains a fleet of vehicles. Each spacecraft has a unique spacecraft ID, a model name, and a crew capacity.
+
+An astronaut can participate in multiple missions, and a mission can include multiple astronauts. For every astronaut who participates in a mission, the agency records the role that 
+the astronaut performs on that mission (such as Commander, Pilot, Engineer, or Scientist).
+
+To execute a mission, a vehicle is required. Therefore, every mission must be assigned to exactly one spacecraft (total participation). However, a spacecraft can exist in the agency's 
+fleet without ever being assigned to a mission (partial participation), such as when a vehicle is newly built or grounded for maintenance.
+
+
+
+Assigned Table                              Spacecraft Table
+=============================               ================================
+Mission_ID | Spacecraft_ID                  Spacecraft_ID | Model_Name | Crew_Capacity
+=============================               ================================
+M501       | S201                            S201          | Orion      | 4
+M502       | S202                            S202          | Starship   | 10
+M503       | S203                            S203          | Dragon     | 7
+M504       | S204                            S204          | SLS        | 4
+
+
+
+
+
+
+
+Problem 3
 =========
 In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical 
 tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals 
@@ -57,7 +88,7 @@ D03 | Dr. Strange | Neurosurgery     D03 | P03 | Spinal Tap               H103 |
 
 
 
-Problem 3
+Problem 4
 =========
 In a programming class, students are organized into teams to conduct various software experiments. Each team is led by one of the students, 
 who acts as the team leader. The class requires a system to track the details of each experiment conducted by the teams and to record the 
