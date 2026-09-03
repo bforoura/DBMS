@@ -70,75 +70,27 @@ Add "Supervises" to your ER diagram from Problem 2 without needing any another e
 
 
 
+
+
 Problem 4
 =========
-In a healthcare system, doctors work at various hospitals and are responsible for treating patients. Each hospital conducts various medical 
-tests on patients and maintains detailed records of these tests, including their types, results, and related information. The hospitals 
-also keep logs of the treatments administered to patients, which include details about the doctors providing the treatments, the type of 
-treatment, and the dates on which these treatments are given.
+
+A university physics department needs a database to track student enrollment, laboratory teams, lab sections, and experimental data from drag physics experiments.
+
+Each student is identified by a unique StudentID and has a first name, last name, and grade. Students can be members of lab teams, and each lab team can have 
+multiple students. Each lab team has one student leader, while a student may lead a lab team.
+
+A lab section is identified by its catalog number, year, semester, and section, and it has a lab assistant and a Drag Experiment Week. Each lab section is 
+associated with one lab team, while a lab team may participate in multiple lab sections.
+
+Each lab section performs multiple drag-experiment runs, while each run belongs to one lab section. A DragExpRun is identified by a RunNumber and records the time, 
+initial position, and distance of the experiment. Each drag-experiment run is conducted by one lab team, while a lab team can conduct multiple runs.
 
 
 
 
-Doctor Table:                        Treatment Table:                      Hospital Table:  
-============================         =============================        =============================
-Doctor_ID | Name | Specialty         Doctor_ID | Patient_ID | Type        Hospital_ID | Name | Location   
-============================         =============================        =============================
-D01 | Dr. House | Diagnostics        D01 | P01 | Chemotherapy             H101 | Mercy Gen | Boston     
-D02 | Dr. Grey | Surgery             D02 | P02 | Appendectomy             H102 | St. Jude | Philadelphia
-D03 | Dr. Strange | Neurosurgery     D03 | P03 | Spinal Tap               H103 | Metro Health | Chicago 
 
 
-
- Patient Table:                        Test Table:
- =======================               ==================================================
- Patient_ID | Name | DOB               Test_ID | Hospital_ID | Patient_ID | Type | Result
- =======================               ==================================================
- P01 | John Doe | 1985-04-12           T901 | H101 | P01 | MRI Brain | Normal
- P02 | Jane Smith | 1990-09-22         T902 | H102 | P02 | Blood Panel | Elevated
- P03 | Robert Lee | 1978-12-05         T903 | H103 | P03 | X-Ray Chest | Clear
-
-
-
-
-Problem 5
-=========
-In a programming class, students are organized into teams to conduct various software experiments. Each team is led by one of the students, 
-who acts as the team leader. The class requires a system to track the details of each experiment conducted by the teams and to record the 
-scores assigned to the teams based on their performance in these experiments.
-
-Each student is identified by a unique ID and has attributes including their name and email address. Each team is also identified by a 
-unique ID and includes a reference to the student who is the team leader. Teams are associated with experiments, and the results of 
-these experiments need to be recorded. Each experiment is identified by a non-unique ID (e.g. Exp#1, Exp#2, etc.) and includes details 
-such as its name and the date it was conducted. The system needs to store the score given to each team for every experiment they 
-participate in. 
-
-Your task is to design an ER model to represent the following information:
--- Students and their roles as team leaders.
--- Teams and the experiments they conduct.
--- The scores assigned to each team for each experiment.
-
-Be sure to define the appropriate entities, their attributes, and the relationships between them, including any dependencies or constraints.
-
-
-
-
-Student Table:                       Team Table: 
-==============================       ===================
-Student_ID | Name | Email            Team_ID | Leader_ID  
-==============================       ====================
-S01 | Alice Lee | alee@univ.edu      T1 | S01              
-S02 | Bob Chen | bchen@univ.edu      T2 | S03             
-S03 | Carol Wu | cwu@univ.edu                              
-
-
-Experiment Table:                    	Participates_In Table:
-================================      =======================
- Exp_ID | Name | Date                	Team_ID | Exp_ID | Score
-=================================     =======================
- Exp#1 | Sorting Algo | 2026-03-01  	  T1 | Exp#1 | 95
- Exp#2 | Graph Search | 2026-03-15  	  T2 | Exp#1 | 88
- Exp#1 | Sorting Algo | 2026-03-01  	  T1 | Exp#2 | 92
 
 
 
