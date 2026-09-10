@@ -59,7 +59,7 @@ create view managers as
    select id, name, salary
    from  employees
    where id in (select mid from manages)
-);
+) with check option;
 
 select * from managers;
 
