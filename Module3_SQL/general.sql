@@ -1,18 +1,3 @@
--- Forouraghi
--- CSC DBMS 
-
--- This example demonstrates:
-
-   -- recursive table creation in SQL
-   -- declaration of constraints/primary keys/foreign keys
-   -- creating/deleting views
-   -- aggregates (min, max, sum, count)
-   -- attribute renaming
-   -- subqueries (some, all, any, in)
-
- 
-
-
 -- *************************************************************
 -- Safe updates
 -- *************************************************************
@@ -44,7 +29,7 @@ select * from employees;
 -- *************************************************************
 -- Create the second relation
 -- *************************************************************
-create table managed
+create table manages
 (
    mid     integer(4) not null,
    eid     integer(4) not null,
@@ -54,10 +39,10 @@ create table managed
 
 
 
-insert into managed values(100,200);
-insert into managed values(100,300);
-insert into managed values(300,400);
-insert into managed values(200,500);
+insert into manages values(100,200);
+insert into manages values(100,300);
+insert into manages values(300,400);
+insert into manages values(200,500);
 
 
 -- *************************************************************
@@ -73,7 +58,7 @@ create view managers as
 (
    select id, name, salary
    from  employees
-   where id in (select mid from managed)
+   where id in (select mid from manages)
 );
 
 select * from managers;
@@ -104,7 +89,7 @@ select max(salary) as MaxSalary from managers;
 -- *************************************************************
 -- Subqueries in SQL allow you to build a cascade of expressions
 -- *************************************************************
-*** Find ID of the highest-paid manager.
+-- Find ID of the highest-paid manager.
 
 select id 
 from   managers
@@ -112,7 +97,7 @@ where  salary = (select max(salary) from managers);
 
 
 
-*** Find ID of those managed by the highest-paid manager.
+-- Find ID of those managed by the highest-paid manager.
 
 select eid
 from   managed
@@ -123,7 +108,7 @@ where  mid = (
              );
 
 
-*** Find all information about those managed by the highest-paid manager.
+-- Find all information about those managed by the highest-paid manager.
 
 select *
 from   employees
@@ -141,24 +126,24 @@ where  id = (
 -- *************************************************************
 -- Aggregates in SQL
 -- *************************************************************
-*** Find smallest salary.
+-- Find smallest salary.
 
 select min(salary) 
 from employees;
 
 
-*** Find how many records there are in the relation.
+-- Find how many records there are in the relation.
 
 select count(*) 
 from employees;
 
 
-*** Find average salary.
+-- Find average salary.
 
 select sum(salary)/count(salary) as AvgSalary 
 from employees;
 
-*** Find average salary.
+-- Find average salary.
 
 select avg(salary) 
 from employees;
@@ -168,7 +153,7 @@ from employees;
 -- Subqueries using all, some, any, in and relational operators
 -- *************************************************************
 
-*** Find who is the lowest-paid employee.
+-- Find who is the lowest-paid employee.
 
 select id, name, salary
 from employees 
@@ -203,7 +188,7 @@ where salary in (select min(salary) from employees)
 -- Updating relations
 -- *************************************************************
 
-*** Give employees a 10% raise.
+-- Give employees a 10% raise.
 
 update employees
 set    salary = 1.1 * salary;
