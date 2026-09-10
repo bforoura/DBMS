@@ -46,8 +46,8 @@ select * from employees;
 -- *************************************************************
 create table managed
 (
-   mid     number(4) not null,
-   eid     number(4) not null,
+   mid     integer(4) not null,
+   eid     integer(4) not null,
    foreign key(mid) references employees(id),
    foreign key(eid) references employees(id)
 );
