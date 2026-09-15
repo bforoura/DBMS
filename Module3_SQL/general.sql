@@ -70,10 +70,6 @@ select * from managers;
 -- a view is read-only
 insert into managers values(600, 'Somebody', 123456);
 
--- let's check managers and employees now
-
-select * from managers;
-select * from employees;
 
 
 
@@ -100,7 +96,7 @@ where  salary = (select max(salary) from managers);
 -- Find ID of those managed by the highest-paid manager.
 
 select eid
-from   managed
+from   manages
 where  mid = (
               select id 
               from   managers
@@ -114,7 +110,7 @@ select *
 from   employees
 where  id = (
             select eid
-            from   managed
+            from   manages
             where  mid = (
                          select id 
                          from   managers
@@ -162,26 +158,26 @@ where salary <= all (select salary from employees);
 
 select id, name, salary
 from employees 
-where salary <= some (select salary from employees)
+where salary <= some (select salary from employees);
 
 select id, name, salary
 from employees 
-where salary <= some (select salary from employees)
+where salary <= some (select salary from employees);
 
 select id, name, salary
 from employees 
-where salary < all (select salary from employees)
+where salary < all (select salary from employees);
 
 select id, name, salary
 from employees 
-where salary = (select min(salary) from employees)   <=== when subqueries returns only one row
-                                                          '=' and '= some' and '= any' become
-                                                          interchangeable     
+where salary = (select min(salary) from employees)   
+    
+-- when subqueries returns only one row '=' and '= some' and '= any' become  interchangeable     
                               
 
 select id, name, salary
 from employees 
-where salary in (select min(salary) from employees)
+where salary in (select min(salary) from employees);
 
 
 -- *************************************************************
