@@ -120,7 +120,7 @@ db.users.aggregate(
         as: 'followedUserDetails'
       }
     },
-    { $unwind: '$followedUserDetails' },
+    { $unwind: path: '$followedUserDetails' },
     {
       $project: {
         _id: 0,
